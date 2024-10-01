@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
-import emailjs from 'emailjs-com';
+import React, { useState } from "react";
+import emailjs from "emailjs-com";
+import { FaQuestionCircle } from "react-icons/fa";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    orderService: '',
-    message: '',
+    name: "",
+    email: "",
+    phoneNumber:"",
+    orderService: "",
+    message: "",
   });
 
-  const [statusMessage, setStatusMessage] = useState(''); // For displaying status messages
+  const [statusMessage, setStatusMessage] = useState(""); // For displaying status messages
   const [loading, setLoading] = useState(false); // Loading state to prevent multiple submissions
 
   const handleChange = (e) => {
@@ -21,38 +23,39 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setLoading(true); // Hiển thị trạng thái loading (nếu có)
 
-    // Basic client-side validation for email format and required fields
-    if (!formData.name || !formData.email || !formData.message) {
-      setStatusMessage('Please fill in all required fields.');
-      return;
-    }
-
-    setLoading(true);
-    setStatusMessage('');
-
-    emailjs.send('service_123456', 'template_566mlih', formData, 'nun00yqEVWR0-HrNo')
+    emailjs
+      .send("service_123456", "template_566mlih", formData, "nun00yqEVWR0-HrNo")
       .then((result) => {
-        setStatusMessage('Message sent successfully!');
+        // Thông báo đặt lịch thành công
+        setStatusMessage(
+          "Đặt lịch thành công! Chúng tôi sẽ liên lạc với bạn sớm nhất có thể thông qua gmail và số điện thoại bạn cung cấp."
+        );
         setFormData({
-          name: '',
-          email: '',
-          orderService: '',
-          message: '',
+          name: "",
+          email: "",
+          phoneNumber:"",
+          orderService: "",
+          message: "",
         });
       })
       .catch((error) => {
-        setStatusMessage('Failed to send message, please try again later.');
+        // Thông báo lỗi khi gửi không thành công
+        setStatusMessage("Không thể gửi tin nhắn, vui lòng thử lại sau.");
       })
       .finally(() => {
-        setLoading(false);
+        setLoading(false); // Tắt trạng thái loading
       });
   };
 
   return (
     <section id="contact" className="py-12 bg-black text-white">
       <div className="text-center text-2xl font-bold mb-6">ĐẶT LỊCH NGAY</div>
-      <form onSubmit={handleSubmit} className="max-w-lg bg-white mx-auto rounded p-6 shadow-lg">
+      <form
+        onSubmit={handleSubmit}
+        className="max-w-lg bg-white mx-auto rounded p-6 shadow-lg text-black"
+      >
         <div className="mb-4">
           <input
             type="text"
@@ -79,35 +82,77 @@ const ContactForm = () => {
         </div>
         <div className="mb-4">
           <input
-            type="text"
+            type="phone"
+            name="phoneNumber"
+            value={formData.phoneNumber}
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-600 rounded"
+            placeholder="Số điện thoại"
+            aria-label="Số điện thoại"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <select
             name="orderService"
             value={formData.orderService}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Order Service"
             aria-label="Order Service"
-          />
+            required
+          >
+            <option value="" disabled>
+              Chọn dịch vụ
+            </option>
+            <option value="vệ sinh giày">Vệ sinh giày</option>
+            <option value="vệ sinh giày luxury">Vệ sinh giày luxury</option>
+            <option value="vệ sinh túi/ví">Vệ sinh túi/ví</option>
+            <option value="vệ sinh túi/ví luxury">Vệ sinh túi/ví luxury</option>
+          </select>
         </div>
+        <div className="mb-4 flex items-center">
+          <input
+            type="checkbox"
+            name="priority"
+            value={formData.priority}
+            onChange={handleChange}
+            className="mr-2"
+            aria-label="Ưu tiên 24h"
+          />
+          <label htmlFor="priority" className="text-black">Ưu tiên 24h</label>
+          <button
+            type="button"
+            className="ml-auto text-blue-500 underline right-0 "
+            onClick={() => alert("Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24 giờ.")}
+          >
+            <FaQuestionCircle />
+          </button>
+          </div>
         <div className="mb-4">
           <textarea
             name="message"
             value={formData.message}
             onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full h-1/2 p-2 border border-gray-300 rounded"
             rows="5"
-            placeholder="Type your message"
+            placeholder="Yêu cầu thêm"
             aria-label="Message"
             required
           ></textarea>
         </div>
+       
         <button
           type="submit"
           className="w-full bg-yellow-400 text-black font-bold py-2 rounded-full hover:bg-yellow-500 transition duration-300"
           disabled={loading}
         >
-          {loading ? 'Sending...' : 'Submit'}
+          {loading ? "Sending..." : "Submit"}
         </button>
-        {statusMessage && <p className="mt-4 text-center text-red-500">{statusMessage}</p>}
+        {statusMessage && (
+        <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
+          <p>{statusMessage}</p>
+        </div>
+      )}
       </form>
     </section>
   );

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaPlus, FaMinus, FaFacebookMessenger} from "react-icons/fa"; // Import icons
+import { FaPlus, FaMinus, FaFacebookMessenger } from "react-icons/fa"; // Import icons
 
 import Icon50Lab from "../assets/images/50lab.jpg";
 const ChatBox = () => {
@@ -45,11 +45,11 @@ const ChatBox = () => {
 
           <div className="mt-4 text-center">
             <a
-              href="https://www.messenger.com/e2ee/t/7582751411743430"
+              href="https://www.messenger.com/t/113966211614285"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="social-button p-2 bg-purple-600 text-white rounded-full hover:bg-blue-700 transition">
+              <button className="social-button p-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">
                 <FaFacebookMessenger size={24} />
               </button>
             </a>
