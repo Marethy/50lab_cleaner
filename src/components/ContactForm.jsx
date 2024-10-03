@@ -26,7 +26,7 @@ const ContactForm = () => {
     setLoading(true); // Hiển thị trạng thái loading (nếu có)
 
     emailjs
-      .send("service_123456", "template_566mlih", formData, "nun00yqEVWR0-HrNo")
+      .send("service_xzvm2db", "template_i25gn75", formData, "uX5HE9XX3c98LTqzw")
       .then((result) => {
         // Thông báo đặt lịch thành công
         setStatusMessage(
@@ -50,11 +50,11 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-12 bg-black text-white">
+    <section id="contact" className="py-12 bg-gray-800 text-white">
       <div className="text-center text-2xl font-bold mb-6">ĐẶT LỊCH NGAY</div>
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg bg-white mx-auto rounded p-6 shadow-lg text-black"
+        className="max-w-lg bg-white mx-auto rounded-3xl p-6 shadow-lg text-black"
       >
         <div className="mb-4">
           <input

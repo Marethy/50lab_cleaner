@@ -6,7 +6,6 @@ import ContactForm from '../components/ContactForm';
 const HomePage = () => {
   return (
     <>
-      <HowItWorks />
       <ServiceCard />
       <ContactForm />
     </>
