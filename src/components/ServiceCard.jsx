@@ -6,7 +6,7 @@ import sla1 from "../assets/images/sla1.jpg"; // Ảnh sau giày luxury
 import spkm1 from "../assets/images/spkm1.jpg"; // Ảnh sản phẩm khử mùi
 import spkm2 from "../assets/images/spkm2.jpg"; // Ảnh sản phẩm khử mùi
 import ut24h1 from "../assets/images/ut24h1.jpg"; // Ảnh ưu tiên 24h
-import { StarIcon } from "@heroicons/react/16/solid";
+  import { StarIcon } from "@heroicons/react/16/solid";
 
 const Service = ({
   service,
@@ -22,26 +22,25 @@ const Service = ({
   const isExpanded = expandedService === service;
 
   return (
-    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg hover:scale-105 transition-all duration-300">
-      <div className="flex flex-col items-center">
-        <div
-          className="relative w-96 h-96 mb-4 cursor-pointer"
-          onClick={() => toggleImage(service)}
-        >
-          <img
-            src={isBefore ? beforeImage : afterImage}
-            alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
-            className="w-full h-full object-cover rounded-lg"
-          />
-        </div>
-        <div
-          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
-          onClick={() => setExpandedService(isExpanded ? null : service)}
-        >
-          {title}
-        </div>
+    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300 min-h-[300px] min-w-[300px]">
+    <div className="flex flex-col items-center">
+      <div
+        className="w-full max-w-[400px] mb-4 cursor-pointer aspect-w-1 aspect-h-1"
+        onClick={() => toggleImage(service)}
+      >
+        <img
+          src={isBefore ? beforeImage : afterImage}
+          alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
+          className="relative w-96 h-96 object-cover rounded-lg"
+        />
       </div>
-
+      <div
+        className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
+        onClick={() => setExpandedService(isExpanded ? null : service)}
+      >
+        {title}
+      </div>
+    </div>
       {/* Expanded details */}
       {isExpanded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10 p-4 rounded-lg">
