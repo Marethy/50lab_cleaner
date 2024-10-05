@@ -50,11 +50,11 @@ const ContactForm = () => {
   };
 
   return (
-    <section id="contact" className="py-12 bg-gray-800 text-white">
-      <div className="text-center text-2xl font-bold mb-6">ĐẶT LỊCH NGAY</div>
+    <section id="contact" className="py-12 bg-gray-800 text-white p-6 ">
+      <div className="text-center text-2xl font-bold mb-8">ĐẶT LỊCH NGAY</div>
       <form
         onSubmit={handleSubmit}
-        className="max-w-lg bg-white mx-auto rounded-3xl p-6 shadow-lg text-black"
+        className=" bg-white mx-auto max-w-[600px] rounded-3xl p-6 shadow-lg text-black"
       >
         <div className="mb-4">
           <input

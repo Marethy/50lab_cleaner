@@ -4,7 +4,7 @@ import services from '../components/services';
 
 const ServicesPage = () => {
   return (
-    <div className="py-10 pl-48">
+    <div className='mx-auto px-4 md:px-24 bg-gray-200 py-20'>
       {services.map(service => (
         <ServiceDetail
           key={service.id}
@@ -15,7 +15,8 @@ const ServicesPage = () => {
           procedure={service.procedure}
           rating={service.rating}
         />
-      ))}
+      ))
+      }
     </div>
   );
 };

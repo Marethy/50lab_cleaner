@@ -12,20 +12,20 @@ const HeaderMenu = () => {
   const menuItems = [
     { to: "/", label: "Trang chủ", isExternal: false },
     { to: "/services/", label: "Dịch vụ", isExternal: false },
-    {to : "/policy", label: "Chính sách", isExternal: false}, 
-    {to: "/about",label: "Về chúng tôi", isExternal: false},  
+    { to: "/policy", label: "Chính sách", isExternal: false },
+    { to: "/about", label: "Về chúng tôi", isExternal: false },
     { to: "/contact", label: "Liên hệ", isExternal: false },
   ];
 
   return (
     <div
       id="header-menu"
-      className="flex justify-between py-2.5 lg:py-4 lg:justify-start lg:items-center lg:space-x-48 relative"
+      className="flex justify-between py-2.5 lg:py-4 lg:justify-start lg:items-center lg:space-x-48 relative "
     >
-      <div className="flex items-center lg:justify-start">
+      <div className="flex items-center lg:justify-start ">
         <a href="/">
           <img
-            className="ml-10 w-20 sm:h-20"
+            className="ml-10 w-20 h-20  "
             src="50lab.jpg"
             alt="50 Lab Logo"
           />
@@ -33,7 +33,7 @@ const HeaderMenu = () => {
       </div>
 
       <nav className="hidden lg:flex items-center justify-between">
-        <ul className="main-menu flex space-x-24 h-full">
+        <ul className="main-menu flex space-x-24 h-full ">
           <Link
             to="/"
             className="text-base font-medium hover:text-gray-900 text-primary"
@@ -68,11 +68,11 @@ const HeaderMenu = () => {
         </ul>
       </nav>
 
-      <div className="absolute right-0 flex items-center justify-end">
-      <button
+      <div className="flex  items-center justify-end mx-8">
+        <button
           id="nav-toggle"
           type="button"
-          className="bg-white rounded-md p-2 pr-0 text-primary focus:outline-none "
+          className="bg-white rounded-md p-2 pr-0  focus:outline-none "
           onClick={toggleMenu}
         >
           <span className="sr-only">Open menu</span>

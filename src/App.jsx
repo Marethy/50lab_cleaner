@@ -15,7 +15,7 @@ import Services from './pages/ServicesPage';
 
 function App() {
   return (
-    <Router>
+    <Router className='max-w-full'>
       <Header/>
       <SideBar />
       <Routes>

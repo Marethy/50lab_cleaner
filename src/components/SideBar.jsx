@@ -12,17 +12,17 @@ const SideBar = () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-between p-4 bg-gray-800 h-full fixed left-0 hidden sm:flex">
+      <div className="flex flex-col items-center justify-between  bg-opacity-100 h-full fixed left-0">
         <div className="flex flex-col items-center space-y-4">
           {/* Hiển thị hình ảnh Icon50Lab */}
           <img
             src={Icon50Lab}
             alt="50Lab Icon"
-            className="w-20 h-20 rounded-full cursor-pointer"
+            className="w-20 h-20 rounded-full cursor-pointer hidden lg:block"
             onClick={toggleModal} // Xử lý sự kiện click vào icon
           />
         </div>
-        <div className="flex flex-col space-y-4 justify-center mb-36">
+        <div className="flex flex-col space-y-4 justify-center mb-32  ">
           {/* Facebook Link with Icon */}
           <a
             href="https://www.facebook.com/profile.php?id=100090212237009"
@@ -54,7 +54,7 @@ const SideBar = () => {
               alt="Zalo Icon"
               className="w-10 h-10 rounded-full bg-white cursor-pointer"
             />
-            </a>
+          </a>
         </div>
       </div>
 

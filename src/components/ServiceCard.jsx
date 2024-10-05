@@ -6,7 +6,7 @@ import sla1 from "../assets/images/sla1.jpg"; // Ảnh sau giày luxury
 import spkm1 from "../assets/images/spkm1.jpg"; // Ảnh sản phẩm khử mùi
 import spkm2 from "../assets/images/spkm2.jpg"; // Ảnh sản phẩm khử mùi
 import ut24h1 from "../assets/images/ut24h1.jpg"; // Ảnh ưu tiên 24h
-  import { StarIcon } from "@heroicons/react/16/solid";
+import { StarIcon } from "@heroicons/react/16/solid";
 
 const Service = ({
   service,
@@ -22,25 +22,25 @@ const Service = ({
   const isExpanded = expandedService === service;
 
   return (
-    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300 min-h-[300px] min-w-[300px]">
-    <div className="flex flex-col items-center">
-      <div
-        className="w-full max-w-[400px] mb-4 cursor-pointer aspect-w-1 aspect-h-1"
-        onClick={() => toggleImage(service)}
-      >
-        <img
-          src={isBefore ? beforeImage : afterImage}
-          alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
-          className="relative w-96 h-96 object-cover rounded-lg"
-        />
+    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300  mx-auto ">
+      <div className="flex flex-col items-center">
+        <div
+          className="w-full max-w-[400px] mb-4 cursor-pointer"
+          onClick={() => toggleImage(service)}
+        >
+          <img
+            src={isBefore ? beforeImage : afterImage}
+            alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
+            className="relative  w-48 h-48 lg:w-96 lg:h-96 object-cover rounded-lg mx-auto my-auto"
+          />
+        </div>
+        <div
+          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
+          onClick={() => setExpandedService(isExpanded ? null : service)}
+        >
+          {title}
+        </div>
       </div>
-      <div
-        className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
-        onClick={() => setExpandedService(isExpanded ? null : service)}
-      >
-        {title}
-      </div>
-    </div>
       {/* Expanded details */}
       {isExpanded && (
         <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10 p-4 rounded-lg">
@@ -105,13 +105,16 @@ const ServiceCard = () => {
   };
 
   return (
-    <section id="services" className="py-12 text-black bg-gray-800">
+    <section
+      id="services"
+      className="py-12 text-black bg-gray-800 min-h-screen"
+    >
       <div className="flex justify-center text-center text-2xl font-bold mb-6 text-white">
         DANH SÁCH CÁC SẢN PHẨM
       </div>
 
-      {/* Grid layout for services with 2 columns on larger screens */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mx-48">
+      {/* Grid layout for services with 2 columns on larger s creens */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Service 1: Shoe Cleaning */}
         <Service
           service="service1"
@@ -203,7 +206,8 @@ const ServiceCard = () => {
           title="Sản phẩm khử mùi"
           details={{
             title: "Chi tiết dịch vụ khử mùi",
-            description: "Sản phẩm khử mùi hiệu quả, giữ cho giày luôn thơm mát.",
+            description:
+              "Sản phẩm khử mùi hiệu quả, giữ cho giày luôn thơm mát.",
             time: "15 phút",
             procedure:
               "1. Nhận giày, 2. Sử dụng sản phẩm khử mùi, 3. Kiểm tra chất lượng.",
@@ -241,4 +245,3 @@ const ServiceCard = () => {
 };
 
 export default ServiceCard;
-  

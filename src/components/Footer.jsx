@@ -1,8 +1,8 @@
 import React from "react";
 import Icon50Lab from "../assets/images/50lab.jpg";
 const Footer = () => (
-  <footer className="bg-gray-800 text-white py-8 ">
-    <div className="container mx-36  grid grid-cols-1 md:grid-cols-3 gap-8 ">
+  <footer className="bg-gray-800 text-white py-8 px-3 md:px-20 lg:px-48">
+    <div className="container grid grid-cols-1 md:grid-cols-3 gap-8 ">
       <div>
         <h3 className="text-lg font-bold mb-4">Thông tin liên hệ</h3>
         <p>Vinhomes Grand Park, Ho Chi Minh City, Vietnam</p>

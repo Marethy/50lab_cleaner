@@ -14,7 +14,7 @@ const ChatBox = () => {
 
   return (
     <div
-      className={`fixed bottom-4 right-6 mr-10 bg-white shadow-lg rounded-lg p-4 transition-all duration-300 ${
+      className={`fixed bottom-4 right-6 bg-white shadow-lg rounded-lg p-4 transition-all duration-300 ${
         isMinimized ? "w-50 h-50" : "w-80 h-80"
       }`}
     >
@@ -30,7 +30,7 @@ const ChatBox = () => {
           onClick={toggleChatBoxSize}
           className="text-gray-700 cursor-pointer font-bold"
         >
-          {isMinimized ? <FaPlus size={20} /> : <FaMinus size={20} />}{" "}
+          {isMinimized ? <FaPlus size={15} /> : <FaMinus size={20} />}{" "}
           {/* Use icons */}
         </button>
       </div>
@@ -43,14 +43,15 @@ const ChatBox = () => {
             </h3>
             <p className="text-sm text-black">
               DỊCH VỤ VỆ SINH GIÀY VÀ ĐỒ DA CHUYÊN NGHIỆP
-              <p className="text-sm text-black">
-              Chất lượng đặt lên hàng đầu, khách nhận hàng không ưng không lấy tiền!!
-              </p>
+            </p>
+            <p className="text-sm text-black">
+              Chất lượng đặt lên hàng đầu, khách nhận hàng không ưng không lấy
+              tiền!!
             </p>
           </div>
 
           <div className="mt-4 text-center gap-x-10 flex items-center justify-center">
-          {/* Messenger Link with Icon */}
+            {/* Messenger Link with Icon */}
             <a
               href="https://www.messenger.com/t/0559964424"
               target="_blank"
