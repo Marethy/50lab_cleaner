@@ -11,28 +11,9 @@ const HeaderMenu = () => {
 
   const menuItems = [
     { to: "/", label: "Trang chủ", isExternal: false },
-    { to: "/services/ve-sinh-giay", label: "Vệ sinh giày", isExternal: false },
-    { to: "/services/ve-sinh-giay-luxury", label: "Vệ sinh giày Luxury", isExternal: false },
-    { to: "/services/ve-sinh-tui-vi", label: "Vệ sinh túi/ ví", isExternal: false },
-    { to: "/services/ve-sinh-tui-vi-luxury", label: "Vệ sinh túi/ ví luxury", isExternal: false },
-    { to: "/services/san-pham-khu-mui", label: "Sản phẩm khử mùi", isExternal: false },
-    { to: "services/uu-tien-24h", label: "Ưu tiên 24h", isExternal: false },
-    {
-        to: "/about",
-      label: "Về chúng tôi !",
-      isExternal: false,    
-    },
-    {
-        to:"/policy",
-        label: "Chính sách",
-        isExternal: false,
-    },
-    { to: "/social", label: "Sneaker Vitamin Social", isExternal: false },
-    {
-      href: "https://sneakervitamin.net/vitamin-blog/",
-      label: "Vitamin Blog",
-      isExternal: true,
-    },
+    { to: "/services/", label: "Dịch vụ", isExternal: false },
+    {to : "/policy", label: "Chính sách", isExternal: false}, 
+    {to: "/about",label: "Về chúng tôi", isExternal: false},  
     { to: "/contact", label: "Liên hệ", isExternal: false },
   ];
 
@@ -66,14 +47,6 @@ const HeaderMenu = () => {
             Dịch vụ
           </Link>
 
-          <li className="self-center">
-            <a
-              href="https://sneakervitamin.net/vitamin-blog/"
-              className="text-base font-medium text-third hover:text-gray-900"
-            >
-              50Lab Blog
-            </a>
-          </li>
           <Link
             to="/contact"
             className="text-base font-medium text-third hover:text-gray-900"
@@ -85,6 +58,12 @@ const HeaderMenu = () => {
             className="text-base font-medium text-third hover:text-gray-900"
           >
             Chính sách
+          </Link>
+          <Link
+            to="/about-us"
+            className="text-base font-medium text-third hover:text-gray-900"
+          >
+            Về chúng tôi
           </Link>
         </ul>
       </nav>

@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './components/Navbar';
 import HowItWorks from './components/HowItWorks';
 import ServiceCard from './components/ServiceCard';
+import AboutUsPage from './pages/AboutUsPage';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import SideBar from './components/SideBar';
@@ -22,6 +23,7 @@ function App() {
         <Route path="/policy" element={<PolicyPage />} /> {/* Route cho trang Policy */}
         <Route path="services" element={<Services />} /> {/* Route cho trang ServiceCard */}
         <Route path="/contact" element={<ContactForm />} /> {/* Route cho trang ContactForm */}
+        <Route path="/about-us" element={<AboutUsPage />} /> {/* Route cho trang HowItWorks */}
       </Routes>
       <ChatBox />
       <Footer />
