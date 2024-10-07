@@ -1,12 +1,21 @@
 import React, { useState } from "react";
-import sa1 from "../assets/images/sa1.jpg"; // Ảnh sau giày thường
-import sb1 from "../assets/images/sb1.jpg"; // Ảnh trước giày thường
-import slb1 from "../assets/images/slb1.jpg"; // Ảnh trước giày luxury
-import sla1 from "../assets/images/sla1.jpg"; // Ảnh sau giày luxury
-import spkm1 from "../assets/images/spkm1.jpg"; // Ảnh sản phẩm khử mùi
-import spkm2 from "../assets/images/spkm2.jpg"; // Ảnh sản phẩm khử mùi
-import ut24h1 from "../assets/images/ut24h1.jpg"; // Ảnh ưu tiên 24h
+import sa1 from "../assets/images/sa1.jpg"; // After image for regular shoes
+import sb1 from "../assets/images/sb1.jpg"; // Before image for regular shoes
+import sa2 from "../assets/images/sa2.jpg"; // After image for regular shoes
+import sb2 from "../assets/images/sb2.jpg"; // Before image for regular shoes
+import bb1 from "../assets/images/bb1.jpg"; // Before image for luxury bags
+import ba1 from "../assets/images/ba1.jpg"; // After image for luxury bags
+import slb1 from "../assets/images/slb1.jpg"; // Before image for luxury shoes
+import sla1 from "../assets/images/sla1.jpg"; // After image for luxury shoes
+
+import blb1 from "../assets/images/blb1.jpg"; // After image for luxury bag
+import bla1 from "../assets/images/bla1.jpg"; // Before image for luxury bag  
+import spkm1 from "../assets/images/spkm1.jpg"; // Before image for deodorizing product
+import spkm2 from "../assets/images/spkm2.jpg"; // After image for deodorizing product
+import ut24h1 from "../assets/images/ut24h1.jpg"; // Image for 24h priority service
 import { StarIcon } from "@heroicons/react/16/solid";
+import services from "./services"; // Import your services
+import { useNavigate } from "react-router-dom";
 
 const Service = ({
   service,
@@ -15,14 +24,15 @@ const Service = ({
   title,
   details,
   expandedService,
-  setExpandedService,
   toggleImage,
   isBefore,
+  setExpandedService,
 }) => {
   const isExpanded = expandedService === service;
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300  mx-auto ">
+    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300 mx-auto">
       <div className="flex flex-col items-center">
         <div
           className="w-full max-w-[400px] mb-4 cursor-pointer"
@@ -31,57 +41,61 @@ const Service = ({
           <img
             src={isBefore ? beforeImage : afterImage}
             alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
-            className="relative  w-48 h-48 lg:w-96 lg:h-96 object-cover rounded-lg mx-auto my-auto"
+            className="relative w-48 h-48 lg:w-96 lg:h-96 object-cover rounded-lg mx-auto "
           />
         </div>
         <div
           className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
-          onClick={() => setExpandedService(isExpanded ? null : service)}
+          onClick={() => navigate('/services')}
         >
           {title}
         </div>
-      </div>
-      {/* Expanded details */}
-      {isExpanded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10 p-4 rounded-lg">
-          <div className="bg-white p-4 rounded-lg text-left flex flex-col md:flex-row">
-            {/* Thông tin dịch vụ bên trái */}
-            <div className="md:w-1/2 p-4">
-              <h3 className="text-xl font-bold mb-2">{details.title}</h3>
-              <p>{details.description}</p>
-              <p>
-                <strong>Thời gian:</strong> {details.time}
-              </p>
-              <p>
-                <strong>Quy trình:</strong> {details.procedure}
-              </p>
-              <p>
-                <strong>Đánh giá:</strong>
-              </p>
-              <div className="flex">
-                {Array.from({ length: details.rating }).map((_, index) => (
-                  <StarIcon key={index} className="text-yellow-500 text-base" />
-                ))}
+
+        {/* Expanded details */}
+        {isExpanded && (
+          <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-70 z-10 p-4 rounded-lg">
+            <div className="bg-white p-4 rounded-lg text-left flex flex-col md:flex-row">
+              {/* Left side service info */}
+              <div className="w-full md:w-1/2 p-4">
+                <h3 className="text-xl font-bold mb-2">{details.title}</h3>
+                <p>{details.description}</p>
+                <p>
+                  <strong>Thời gian:</strong> {details.time}
+                </p>
+                <p>
+                  <strong>Quy trình:</strong> {details.procedure}
+                </p>
+                <p>
+                  <strong>Đánh giá:</strong>
+                </p>
+                <div className="flex">
+                  {Array.from({ length: details.rating }).map((_, index) => (
+                    <StarIcon
+                      key={index}
+                      className="text-yellow-500 text-base"
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Right side service image */}
+              <div className="md:w-1/2">
+                <img
+                  src={isBefore ? beforeImage : afterImage}
+                  alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
+                  className="w-full h-auto object-cover rounded-lg"
+                />
               </div>
             </div>
-
-            {/* Ảnh dịch vụ bên phải */}
-            <div className="md:w-1/2">
-              <img
-                src={isBefore ? beforeImage : afterImage}
-                alt={isBefore ? "Trước khi vệ sinh" : "Sau khi vệ sinh"}
-                className="w-full h-auto object-cover rounded-lg"
-              />
-            </div>
+            <button
+              className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded"
+              onClick={() => setExpandedService(null)}
+            >
+              Đóng
+            </button>
           </div>
-          <button
-            className="absolute top-4 right-4 p-2 bg-red-500 text-white rounded"
-            onClick={() => setExpandedService(null)}
-          >
-            Đóng
-          </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
@@ -113,14 +127,14 @@ const ServiceCard = () => {
         DANH SÁCH CÁC SẢN PHẨM
       </div>
 
-      {/* Grid layout for services with 2 columns on larger s creens */}
+      {/* Grid layout for services with 2 columns on larger screens */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         {/* Service 1: Shoe Cleaning */}
         <Service
           service="service1"
-          beforeImage={sb1}
-          afterImage={sa1}
-          title="Vệ sinh giày"
+          beforeImage={sb2}
+          afterImage={sa2}
+          title="Vệ sinh giày - 50.000đ "
           details={{
             title: "Chi tiết dịch vụ vệ sinh giày",
             description:
@@ -141,9 +155,9 @@ const ServiceCard = () => {
           service="service2"
           beforeImage={slb1}
           afterImage={sla1}
-          title="Vệ sinh giày luxury"
+          title="Vệ sinh giày cao cấp -120.000đ"
           details={{
-            title: "Chi tiết dịch vụ vệ sinh giày luxury",
+            title: "Chi tiết dịch vụ vệ sinh giày luxury ",
             description:
               "Dịch vụ vệ sinh giày luxury, bảo vệ chất liệu và giúp giày như mới.",
             time: "45 phút",
@@ -160,9 +174,9 @@ const ServiceCard = () => {
         {/* Service 3: Regular Bag Cleaning */}
         <Service
           service="service3"
-          beforeImage="link_to_bag_cleaning_before_image"
-          afterImage="link_to_bag_cleaning_after_image"
-          title="Vệ sinh túi/ ví"
+          beforeImage={bb1} // Replace with actual image link
+          afterImage={ba1} // Replace with actual image link
+          title="Vệ sinh túi/ví - 80.000đ"
           details={{
             title: "Chi tiết dịch vụ vệ sinh túi/ ví",
             description: "Dịch vụ vệ sinh túi và ví thông thường.",
@@ -180,9 +194,9 @@ const ServiceCard = () => {
         {/* Service 4: Luxury Bag Cleaning */}
         <Service
           service="service4"
-          beforeImage="link_to_luxury_bag_cleaning_before_image"
-          afterImage="link_to_luxury_bag_cleaning_after_image"
-          title="Vệ sinh túi/ ví luxury"
+          beforeImage={blb1} // Replace with actual image link
+          afterImage={bla1} // Replace with actual image link
+          title="Vệ sinh túi/ví cao cấp - 250.000đ"
           details={{
             title: "Chi tiết dịch vụ vệ sinh túi/ ví luxury",
             description:
@@ -203,7 +217,7 @@ const ServiceCard = () => {
           service="service5"
           beforeImage={spkm1}
           afterImage={spkm2} // Same image for before and after, adjust if needed
-          title="Sản phẩm khử mùi"
+          title="Sản phẩm khử mùi - 49.000đ"
           details={{
             title: "Chi tiết dịch vụ khử mùi",
             description:
@@ -224,7 +238,7 @@ const ServiceCard = () => {
           service="service6"
           beforeImage={ut24h1}
           afterImage={ut24h1} // Same image for before and after, adjust if needed
-          title="Ưu tiên 24h"
+          title="Ưu tiên 24h - 25.000đ"
           details={{
             title: "Chi tiết dịch vụ ưu tiên 24h",
             description:

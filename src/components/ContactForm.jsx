@@ -6,24 +6,27 @@ const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    phoneNumber:"",
+    phoneNumber: "",
     orderService: "",
     message: "",
+    priority: false, // Add priority to form data
   });
 
   const [statusMessage, setStatusMessage] = useState(""); // For displaying status messages
   const [loading, setLoading] = useState(false); // Loading state to prevent multiple submissions
+  const [isInfoVisible, setIsInfoVisible] = useState(false); // State to control the visibility of the info section
 
   const handleChange = (e) => {
+    const { name, type, checked, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value,
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Hiển thị trạng thái loading (nếu có)
+    setLoading(true); // Hiển thị trạng thái loading
 
     emailjs
       .send("service_xzvm2db", "template_i25gn75", formData, "uX5HE9XX3c98LTqzw")
@@ -35,9 +38,10 @@ const ContactForm = () => {
         setFormData({
           name: "",
           email: "",
-          phoneNumber:"",
+          phoneNumber: "",
           orderService: "",
           message: "",
+          priority: false, // Reset priority
         });
       })
       .catch((error) => {
@@ -114,7 +118,7 @@ const ContactForm = () => {
           <input
             type="checkbox"
             name="priority"
-            value={formData.priority}
+            checked={formData.priority}
             onChange={handleChange}
             className="mr-2"
             aria-label="Ưu tiên 24h"
@@ -122,12 +126,17 @@ const ContactForm = () => {
           <label htmlFor="priority" className="text-black">Ưu tiên 24h</label>
           <button
             type="button"
-            className="ml-auto text-blue-500 underline right-0 "
-            onClick={() => alert("Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24 giờ.")}
+            className="ml-auto text-blue-500 underline"
+            onClick={() => setIsInfoVisible(!isInfoVisible)}
           >
             <FaQuestionCircle />
           </button>
+        </div>
+        {isInfoVisible && (
+          <div className="p-2 border border-blue-300 rounded bg-blue-100 text-blue-800">
+            Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24 giờ.
           </div>
+        )}
         <div className="mb-4">
           <textarea
             name="message"
@@ -140,7 +149,7 @@ const ContactForm = () => {
             required
           ></textarea>
         </div>
-       
+
         <button
           type="submit"
           className="w-full bg-yellow-400 text-black font-bold py-2 rounded-full hover:bg-yellow-500 transition duration-300"
@@ -149,10 +158,10 @@ const ContactForm = () => {
           {loading ? "Sending..." : "Submit"}
         </button>
         {statusMessage && (
-        <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
-          <p>{statusMessage}</p>
-        </div>
-      )}
+          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
+            <p>{statusMessage}</p>
+          </div>
+        )}
       </form>
     </section>
   );

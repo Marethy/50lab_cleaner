@@ -17,7 +17,6 @@ function App() {
   return (
     <Router className='max-w-full'>
       <Header/>
-      <SideBar />
       <Routes>
         <Route path="/" element={<HomePage />} /> {/* Route cho trang chính */}
         <Route path="/policy" element={<PolicyPage />} /> {/* Route cho trang Policy */}

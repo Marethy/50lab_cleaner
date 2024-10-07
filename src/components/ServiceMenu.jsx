@@ -20,7 +20,7 @@ const ServiceMenu = () => {
               to="ve-sinh-giay-luxury/" 
               className="hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
-              Vệ sinh giày luxury
+              Vệ sinh giày cao cấp
             </Link>
           </li>
           <li className="rounded-lg md:px-2 md:py-2 lg:px-3 lg:py-1">
@@ -28,7 +28,7 @@ const ServiceMenu = () => {
               to="ve-sinh-tui-vi/" 
               className="hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
-              Vệ sinh túi/ ví
+              Vệ sinh túi/ ví 
             </Link>
           </li>
           <li className="rounded-lg md:px-2 md:py-2 lg:px-3 lg:py-1">
@@ -36,7 +36,7 @@ const ServiceMenu = () => {
               to="ve-sinh-tui-vi-luxury/" 
               className="hover:bg-red-500 hover:text-white transition-colors duration-200"
             >
-              Phục hồi túi/ ví luxury   
+              Vệ sinh túi/ ví cao cấp    
             </Link>
           </li>
           <li className="rounded-lg md:px-2 md:py-2 lg:px-3 lg:py-1">

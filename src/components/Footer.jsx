@@ -5,11 +5,16 @@ const Footer = () => (
     <div className="container grid grid-cols-1 md:grid-cols-3 gap-8 ">
       <div>
         <h3 className="text-lg font-bold mb-4">Thông tin liên hệ</h3>
-        <p>Vinhomes Grand Park, Ho Chi Minh City, Vietnam</p>
+        <p>
+          Địa chỉ :{" "}
+          <a href="https://www.google.com/maps?q=69+Tân+Lập,+Đông+Hòa,+Dĩ+An,+Bình+Dương" className="underline">
+            Chung cư Bcons Miền Đông
+          </a>
+        </p>
         <p>
           Hotline:{" "}
-          <a href="tel:0822610252" className="underline">
-            0822610252
+          <a href="tel:0559964424" className="underline">
+            055 996 4424
           </a>
         </p>
         <p>
@@ -23,7 +28,7 @@ const Footer = () => (
         </p>
       </div>
 
-      <div>
+      {/* <div>
         <h3 className="text-lg font-bold mb-4">Dịch vụ 50-Lab</h3>
         <ul>
           <li>Vệ sinh giày </li>
@@ -42,7 +47,7 @@ const Footer = () => (
           <li>Hình thức thanh toán</li>
           <li>Chính sách vận chuyển</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   </footer>
 );

@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { FaPlus, FaMinus, FaFacebookMessenger } from "react-icons/fa"; // Import icons
 import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
@@ -14,8 +15,8 @@ const ChatBox = () => {
 
   return (
     <div
-      className={`fixed bottom-4 right-6 bg-white shadow-lg rounded-lg p-4 transition-all duration-300 ${
-        isMinimized ? "w-50 h-50" : "w-80 h-80"
+      className={`fixed bottom-36 right-6 bg-white shadow-lg rounded-lg p-4 transition-all duration-300 ${
+        isMinimized ? "w-30 h-30" : "w-80 h-80"
       }`}
     >
       <div className="flex justify-between items-center">
@@ -39,12 +40,10 @@ const ChatBox = () => {
         <div>
           <div className="mt-2 text-center">
             <h3 className="text-lg font-bold text-black">
-              Chat với 50LAB ngay
+              Chat với 50-Lab ngay
             </h3>
-            <p className="text-sm text-black">
-              DỊCH VỤ VỆ SINH GIÀY VÀ ĐỒ DA CHUYÊN NGHIỆP
-            </p>
-            <p className="text-sm text-black">
+       
+            <p className="text-md text-black ">
               Chất lượng đặt lên hàng đầu, khách nhận hàng không ưng không lấy
               tiền!!
             </p>
@@ -88,8 +87,8 @@ const ChatBox = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="social-button p-2 bg-white-600 text-white rounded-full hover:bg-gray-200 transition">
-                <img src={ZaloIcon} alt="Zalo" />
+              <button className="social-button p-2 bg-white-600 text-white  hover:bg-gray-200 transition ">
+                <img src={ZaloIcon} alt="Zalo" className="rounded-full" />
               </button>
             </a>
           </div>
