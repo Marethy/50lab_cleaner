@@ -3,13 +3,14 @@ import emailjs from "emailjs-com";
 import { FaQuestionCircle } from "react-icons/fa";
 
 const ContactForm = () => {
+  const phoneRegex = "^(84|0[3|5|7|8|9])+([0-9]{8})\\b"; // Using regex in pattern
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phoneNumber: "",
     orderService: "",
     message: "",
-    priority: false, // Add priority to form data
+    priority: false,
   });
 
   const [statusMessage, setStatusMessage] = useState(""); // For displaying status messages
@@ -29,7 +30,12 @@ const ContactForm = () => {
     setLoading(true); // Hiển thị trạng thái loading
 
     emailjs
-      .send("service_xzvm2db", "template_i25gn75", formData, "uX5HE9XX3c98LTqzw")
+      .send(
+        "service_xzvm2db",
+        "template_i25gn75",
+        formData,
+        "uX5HE9XX3c98LTqzw"
+      )
       .then((result) => {
         // Thông báo đặt lịch thành công
         setStatusMessage(
@@ -86,7 +92,7 @@ const ContactForm = () => {
         </div>
         <div className="mb-4">
           <input
-            type="phone"
+            type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleChange}
@@ -94,6 +100,7 @@ const ContactForm = () => {
             placeholder="Số điện thoại"
             aria-label="Số điện thoại"
             required
+            pattern={phoneRegex}
           />
         </div>
         <div className="mb-4">
@@ -109,9 +116,11 @@ const ContactForm = () => {
               Chọn dịch vụ
             </option>
             <option value="vệ sinh giày">Vệ sinh giày</option>
-            <option value="vệ sinh giày luxury">Vệ sinh giày luxury</option>
+            <option value="vệ sinh giày luxury">Vệ sinh giày cao cấp</option>
             <option value="vệ sinh túi/ví">Vệ sinh túi/ví</option>
-            <option value="vệ sinh túi/ví luxury">Vệ sinh túi/ví luxury</option>
+            <option value="vệ sinh túi/ví luxury">
+              Vệ sinh túi/ví cao cấp
+            </option>
           </select>
         </div>
         <div className="mb-4 flex items-center">
@@ -123,7 +132,9 @@ const ContactForm = () => {
             className="mr-2"
             aria-label="Ưu tiên 24h"
           />
-          <label htmlFor="priority" className="text-black">Ưu tiên 24h</label>
+          <label htmlFor="priority" className="text-black">
+            Ưu tiên 24h
+          </label>
           <button
             type="button"
             className="ml-auto text-blue-500 underline"
@@ -134,7 +145,8 @@ const ContactForm = () => {
         </div>
         {isInfoVisible && (
           <div className="p-2 border border-blue-300 rounded bg-blue-100 text-blue-800">
-            Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24 giờ.
+            Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24
+            giờ.
           </div>
         )}
         <div className="mb-4">
@@ -152,7 +164,7 @@ const ContactForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-yellow-400 text-black font-bold py-2 rounded-full hover:bg-yellow-500 transition duration-300"
+          className="w-full bg-blue-400 text-black font-bold py-2 rounded-full hover:bg-blue-500 transition duration-300"
           disabled={loading}
         >
           {loading ? "Sending..." : "Submit"}

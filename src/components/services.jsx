@@ -2,7 +2,7 @@ const services = [
   {
     id: 1,
     name: 'Vệ Sinh Giày - 50.000đ',
-    serviceInfo: 'Dịch vụ vệ sinh giày cơ bản, sử dụng sản phẩm an toàn cho các loại chất liệu như da, vải, và giày lộn. Giúp loại bỏ bụi bẩn và vết bẩn cứng đầu, mang lại vẻ ngoài sạch sẽ cho đôi giày của bạn.',
+    serviceInfo: 'Dịch vụ vệ sinh cơ bản cho những đôi giày có giá trị dưới 10 triệu đồng, sử dụng dung dịch vệ sinh an toàn cho các loại chất liệu như da, da lộn và vải canvas. Giúp loại bỏ vết bẩn cứng đầu, mang lại vẻ ngoài sạch sẽ và thơm tho cho đôi giày của bạn.',
     time: '2-5 ngày',
     procedure: [
       'Nhận giày',
@@ -14,7 +14,7 @@ const services = [
   {
     id: 2,
     name: 'Vệ Sinh Giày Cao Cấp - 120.000đ',
-    serviceInfo: 'Dịch vụ vệ sinh dành riêng cho các loại giày cao cấp. Sử dụng các sản phẩm đặc biệt để bảo vệ chất liệu cao cấp và giữ nguyên vẻ sang trọng cho giày.',
+    serviceInfo: 'Dịch vụ vệ sinh dành riêng cho các loại giày cao cấp có giá trị trên 10 triệu đồng, Sử dụng dung dịch vệ sinh đặc biệt để bảo vệ chất liệu cao cấp và giữ nguyên vẻ sang trọng cho giày.',
     time: '2-5 ngày',
     procedure: [
       'Nhận giày',
@@ -27,7 +27,7 @@ const services = [
   {
     id: 3,
     name: 'Vệ Sinh Túi/Ví - 80.000đ',
-    serviceInfo: 'Dịch vụ vệ sinh cơ bản cho túi xách và ví, giúp làm sạch bụi bẩn và vết ố mà không gây hại cho bề mặt túi/ví.',
+    serviceInfo: 'Dịch vụ vệ sinh cơ bản cho túi xách và ví có giá trị dưới 10 triệu đồng, giúp làm sạch bụi bẩn và vết ố mà không gây hại cho bề mặt túi/ví.',
     time: '2-5 ngày',
     procedure: [
       'Nhận túi/ví',
@@ -39,7 +39,7 @@ const services = [
   {
     id: 4,
     name: 'Vệ Sinh Túi/Ví Cao Cấp - 250.000đ',
-    serviceInfo: 'Dịch vụ cao cấp dành cho túi và ví làm từ chất liệu cao cấp. Sử dụng các kỹ thuật và sản phẩm đặc biệt để bảo vệ và làm sạch bề mặt mà không gây hại cho túi/ví.',
+    serviceInfo: 'Dịch vụ dành cho túi và ví làm từ chất liệu cao cấp có giá trị trên 10 triệu đồng. Sử dụng các kỹ thuật và dung dịch vệ sinh đặc biệt để bảo vệ và làm sạch bề mặt mà không gây hại cho túi/ví.',
     time: '2-5 ngày',
     procedure: [
       'Nhận túi/ví',
@@ -51,7 +51,7 @@ const services = [
   {
     id: 5,
     name: 'Sản phẩm khử mùi - 49.000đ',
-    serviceInfo: 'Dịch vụ khử mùi hiệu quả cho giày, túi xách và ví. Sử dụng sản phẩm khử mùi chuyên dụng, loại bỏ hoàn toàn mùi khó chịu mà không ảnh hưởng đến chất liệu.',
+    serviceInfo: 'Là sản phẩm khử mùi chuyên dụng, giải pháp hiệu quả để loại bỏ hoàn toàn mùi hôi mà không ảnh hưởng đến chất liệu.',
     time: '',
     procedure: [],
   },
