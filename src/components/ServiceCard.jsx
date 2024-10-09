@@ -42,13 +42,13 @@ const Service = ({
           />
         </div>
         <div
-          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
+          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer w-3/4 h-10 text-center hover:bg-gray-400"
           onClick={() => navigate('/services')}
         >
           {title}
         </div>
         <div
-          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer"
+          className="text-2xl  cursor-pointer"
           onClick={() => navigate('/services')}
          >{price}
         </div>
@@ -81,10 +81,10 @@ const ServiceCard = () => {
   return (
     <section
       id="services"
-      className="py-12 text-black bg-gray-200 min-h-screen"
+      className="py-12 text-black bg-gray-200 min-h-screen "
     >
-      <div className="flex justify-center text-center text-2xl font-bold mb-6 text-black">
-        DANH SÁCH CÁC SẢN PHẨM
+      <div className="flex justify-center text-center text-2xl font-bold mb-6 pb-10 text-black">
+        DANH SÁCH CÁC DỊCH VỤ
       </div>
 
       {/* Grid layout for services with 2 columns on larger screens */}

@@ -8,7 +8,7 @@ const PolicyPage = () => {
       <div className="max-w-4xl mx-auto bg-white border text-black px-5 py-10 rounded-xl ">
 
         <section className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Chính Sách Hoàn Trả</h2>
+          <h2 className="text-2xl font-semibold mb-4">Chính sách hoàn trả</h2>
           <p>
             Chúng tôi cam kết hoàn tiền nếu bạn không hài lòng với dịch vụ của
             chúng tôi trong vòng 2 ngày kể từ ngày nhận giày hoặc túi xách. Để yêu
@@ -17,7 +17,7 @@ const PolicyPage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Chính Sách Bảo Hành</h2>
+          <h2 className="text-2xl font-semibold mb-4">Chính sách bảo hành</h2>
           <p>
             Chúng tôi bảo hành tất cả các dịch vụ trong vòng 14 ngày. Nếu có bất kỳ
             vấn đề nào liên quan đến dịch vụ đã sử dụng, vui lòng liên hệ với chúng tôi để được hỗ trợ kịp thời.
@@ -25,7 +25,7 @@ const PolicyPage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Hình Thức Thanh Toán</h2>
+          <h2 className="text-2xl font-semibold mb-4">Hình thức thanh toán</h2>
           <p>Chúng tôi chấp nhận các hình thức thanh toán sau:</p>
           <ul className="list-disc pl-6">
             <li>Tiền mặt</li>
@@ -35,7 +35,7 @@ const PolicyPage = () => {
         </section>
 
         <section className="mb-6">
-          <h2 className="text-2xl font-semibold mb-4">Chính Sách Vận Chuyển</h2>
+          <h2 className="text-2xl font-semibold mb-4">Chính sách vận chuyển</h2>
           <p>
             50-Lab chỉ hoạt động trong khu vực Thành phố Hồ Chí Minh. Hiện tại, chúng tôi cung cấp dịch vụ vận chuyển miễn phí cho tất cả các đơn hàng trong khu vực Làng Đại học. Đối với các đơn hàng khác, phí vận chuyển đồng giá 30.000 VND (2 chiều).
           </p>

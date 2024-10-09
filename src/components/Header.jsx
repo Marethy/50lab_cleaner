@@ -33,46 +33,46 @@ const HeaderMenu = () => {
       </div>
 
       <nav className="hidden lg:flex items-center justify-between">
-        <ul className="main-menu flex space-x-24 h-full ">
+        <ul className="main-menu flex  text-xl font-medium  space-x-24 h-full hover:text-gray-200 ">
           <Link
             to="/"
-            className="text-base font-medium hover:text-gray-900 text-primary"
+            className="  hover:text-gray-900 text-primary"
           >
             Trang chủ
           </Link>
           <Link
             to="/services"
-            className="text-base font-medium hover:text-gray-900 text-primary"
+            className="  hover:text-gray-900 text-primary"
           >
             Dịch vụ
           </Link>
 
           <Link
             to="/contact"
-            className="text-base font-medium text-third hover:text-gray-900"
+            className="  text-third hover:text-gray-900"
           >
             Liên hệ
           </Link>
           <Link
             to="/policy"
-            className="text-base font-medium text-third hover:text-gray-900"
+            className="  text-third hover:text-gray-900"
           >
             Chính sách
           </Link>
           <Link
             to="/about-us"
-            className="text-base font-medium text-third hover:text-gray-900"
+            className="  text-third hover:text-gray-900"
           >
             Về chúng tôi
           </Link>
         </ul>
       </nav>
 
-      <div className="flex  items-center justify-end mx-8">
+      <div className="flex  justify-end ">
         <button
           id="nav-toggle"
           type="button"
-          className="bg-white rounded-md p-2 pr-0  focus:outline-none "
+          className="bg-white rounded-  focus:outline-none "
           onClick={toggleMenu}
         >
           <span className="sr-only">Open menu</span>
