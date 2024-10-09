@@ -39,7 +39,7 @@ const services = [
   {
     id: 4,
     name: 'Vệ Sinh Túi/Ví Cao Cấp - 250.000đ',
-    serviceInfo: 'Dịch vụ dành cho túi và ví làm từ chất liệu cao cấp có giá trị trên 10 triệu đồng. Sử dụng các kỹ thuật và dung dịch vệ sinh đặc biệt để bảo vệ và làm sạch bề mặt mà không gây hại cho túi/ví.',
+    serviceInfo: 'Dịch vụ dành cho túi xách và ví làm từ chất liệu cao cấp có giá trị trên 10 triệu đồng. Sử dụng kỹ thuật và dung dịch vệ sinh đặc biệt để bảo vệ và làm sạch bề mặt mà không gây hại cho túi/ví.',
     time: '2-5 ngày',
     procedure: [
       'Nhận túi/ví',
@@ -51,14 +51,14 @@ const services = [
   {
     id: 5,
     name: 'Sản phẩm khử mùi - 49.000đ',
-    serviceInfo: 'Là sản phẩm khử mùi chuyên dụng, giải pháp hiệu quả để loại bỏ hoàn toàn mùi hôi mà không ảnh hưởng đến chất liệu.',
+    serviceInfo: 'Là sản phẩm xịt khử mùi chuyên dụng, giải pháp hiệu quả để loại bỏ hoàn toàn mùi hôi mà không ảnh hưởng đến chất liệu.',
     time: '',
     procedure: [],
   },
   {
     id: 6,
     name: 'Ưu Tiên 24h - 25.000đ',
-    serviceInfo: 'Dịch vụ ưu tiên dành cho khách hàng cần gấp. Chúng tôi cam kết hoàn thành vệ sinh và bảo dưỡng giày, túi/ví trong vòng 24 giờ.',
+    serviceInfo: 'Dịch vụ ưu tiên dành cho khách hàng cần gấp. Chúng tôi cam kết hoàn thành vệ sinh và bảo dưỡng giày, túi xách và ví trong vòng 24 giờ.',
     time: '24 giờ',
     procedure: [
       'Nhận sản phẩm',

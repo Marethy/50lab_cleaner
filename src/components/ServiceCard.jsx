@@ -29,7 +29,7 @@ const Service = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white p-4 rounded-3xl relative hover:shadow-lg transition-all duration-300 mx-auto">
+    <div className="bg-white p-10 pb-6  md:p-16 md:pb-10 rounded-3xl relative hover:shadow-lg transition-all duration-300 mx-auto">
       <div className="flex flex-col items-center">
         <div
           className="w-full max-w-[400px] mb-4 cursor-pointer"
@@ -108,7 +108,8 @@ const ServiceCard = () => {
           afterImage={sla1}
           title="Vệ sinh giày cao cấp"
           price="120.000đ"
- 
+          toggleImage={toggleImage}
+          isBefore={isBefore.service2}
       
         />
 
@@ -119,7 +120,8 @@ const ServiceCard = () => {
           afterImage={ba1} // Replace with actual image link
           title="Vệ sinh túi/ví"
           price="80.000đ"
-
+          toggleImage={toggleImage}
+          isBefore={isBefore.service3}
         />
 
         {/* Service 4: Luxury Bag Cleaning */}
@@ -129,7 +131,8 @@ const ServiceCard = () => {
           afterImage={bla1} // Replace with actual image link
           title="Vệ sinh túi/ví cao cấp "
           price="250.000đ"
-
+          toggleImage={toggleImage}
+          isBefore={isBefore.service4}
     
         />
 
@@ -140,7 +143,8 @@ const ServiceCard = () => {
           afterImage={spkm2} // Same image for before and after, adjust if needed
           title="Sản phẩm khử mùi"
           price="49.000đ"
-     
+          toggleImage={toggleImage}
+          isBefore={isBefore.service5}
        
         />
 
@@ -151,7 +155,8 @@ const ServiceCard = () => {
           afterImage={ut24h1} // Same image for before and after, adjust if needed
           title="Ưu tiên 24h"
           price ="25.000đ"
-
+          toggleImage={toggleImage}
+          isBefore={isBefore.service6}
          
         />
       </div>

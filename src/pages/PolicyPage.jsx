@@ -2,9 +2,10 @@ import React from "react";
 
 const PolicyPage = () => {
   return (
-    <div className="bg-gray-200">
-      <div className="max-w-4xl mx-auto bg-white border text-black px-5 py-10">
-        <h1 className="text-3xl font-bold mb-6 text-center">Chính Sách</h1>
+    <div className="bg-gray-200 py-10 flex flex-col items-center gap-10">
+              <h1 className="text-3xl font-bold text-center">Chính Sách</h1>
+
+      <div className="max-w-4xl mx-auto bg-white border text-black px-5 py-10 rounded-xl ">
 
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Chính Sách Hoàn Trả</h2>

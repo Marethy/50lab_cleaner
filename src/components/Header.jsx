@@ -13,7 +13,7 @@ const HeaderMenu = () => {
     { to: "/", label: "Trang chủ", isExternal: false },
     { to: "/services/", label: "Dịch vụ", isExternal: false },
     { to: "/policy", label: "Chính sách", isExternal: false },
-    { to: "/about", label: "Về chúng tôi", isExternal: false },
+    { to: "/about-us", label: "Về chúng tôi", isExternal: false },
     { to: "/contact", label: "Liên hệ", isExternal: false },
   ];
 
