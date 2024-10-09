@@ -42,13 +42,13 @@ const Service = ({
           />
         </div>
         <div
-          className="text-2xl bg-gray-200 rounded-2xl cursor-pointer w-3/4 h-10 text-center hover:bg-gray-400"
+          className="text-lg md:text-2xl bg-gray-200 rounded-lg cursor-pointer w-full  text-center hover:bg-gray-400"
           onClick={() => navigate('/services')}
         >
           {title}
         </div>
         <div
-          className="text-2xl  cursor-pointer"
+          className="text-lg md:text-2xl  cursor-pointer"
           onClick={() => navigate('/services')}
          >{price}
         </div>
@@ -88,7 +88,7 @@ const ServiceCard = () => {
       </div>
 
       {/* Grid layout for services with 2 columns on larger screens */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         {/* Service 1: Shoe Cleaning */}
         <Service
           service="service1"

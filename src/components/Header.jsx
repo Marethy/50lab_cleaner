@@ -18,14 +18,11 @@ const HeaderMenu = () => {
   ];
 
   return (
-    <div
-      id="header-menu"
-      className="flex justify-between py-2.5 lg:py-4 lg:justify-start lg:items-center lg:space-x-48 relative "
-    >
+    <div  className="flex justify-between py-2.5 lg:py-4  lg:items-center lg:space-x-48 relative " >
       <div className="flex items-center lg:justify-start ">
         <a href="/">
           <img
-            className="ml-10 w-20 h-20  "
+            className="md:ml-10 w-20 h-20  "
             src="50lab.jpg"
             alt="50 Lab Logo"
           />
@@ -33,7 +30,7 @@ const HeaderMenu = () => {
       </div>
 
       <nav className="hidden lg:flex items-center justify-between">
-        <ul className="main-menu flex  text-xl font-medium  space-x-24 h-full hover:text-gray-200 ">
+        <ul className="main-menu flex  text-xl font-medium  space-x-24 h-full text-gray-500 focus:font-black ">
           <Link
             to="/"
             className="  hover:text-gray-900 text-primary"
@@ -68,7 +65,7 @@ const HeaderMenu = () => {
         </ul>
       </nav>
 
-      <div className="flex  justify-end ">
+      <div className="flex mr-5  ">
         <button
           id="nav-toggle"
           type="button"

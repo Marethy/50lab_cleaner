@@ -15,24 +15,23 @@ const ChatBox = () => {
 
   return (
     <div
-      className={`fixed bottom-36 right-6 bg-white shadow-lg rounded-lg p-4 transition-all duration-300 ${
+      className={` rounded-full	 fixed bottom-36 right-6 bg-white shadow-lg  p-4 transition-all duration-300 ${
         isMinimized ? "w-30 h-30" : "w-80 h-80"
       }`}
     >
       <div className="flex justify-between items-center">
-        <img
-          src={Icon50Lab}
-          alt="50LabLogo"
-          className={`object-contain ${
-            isMinimized ? "w-16 h-16" : "w-16 h-16"
-          }`}
-        />
+       
         <button
           onClick={toggleChatBoxSize}
           className="text-gray-700 cursor-pointer font-bold"
         >
-          {isMinimized ? <FaPlus size={15} /> : <FaMinus size={20} />}{" "}
-          {/* Use icons */}
+          <img
+          src={Icon50Lab}
+          alt="50LabLogo"
+          className={` rounded-full object-contain ${
+            isMinimized ? "w-16 h-16" : "w-16 h-16"
+          }`}
+        />
         </button>
       </div>
 
@@ -52,7 +51,7 @@ const ChatBox = () => {
           <div className="mt-4 text-center gap-x-10 flex items-center justify-center">
             {/* Messenger Link with Icon */}
             <a
-              href="https://www.messenger.com/t/0559964424"
+              href="https://www.facebook.com/messages/t/113966211614285"
               target="_blank"
               rel="noopener noreferrer"
             >

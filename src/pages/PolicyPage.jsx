@@ -3,7 +3,7 @@ import React from "react";
 const PolicyPage = () => {
   return (
     <div className="bg-gray-200 py-10 flex flex-col items-center gap-10">
-              <h1 className="text-3xl font-bold text-center">Chính Sách</h1>
+              <h1 className="text-3xl font-bold text-center">Chính sách</h1>
 
       <div className="max-w-4xl mx-auto bg-white border text-black px-5 py-10 rounded-xl ">
 
