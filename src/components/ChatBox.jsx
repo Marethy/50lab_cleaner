@@ -1,8 +1,6 @@
-
 import React, { useState } from "react";
 import { FaPlus, FaMinus, FaFacebookMessenger } from "react-icons/fa"; // Import icons
-import { FaInstagram } from "@react-icons/all-files/fa/FaInstagram";
-import { FaFacebook } from "@react-icons/all-files/fa/FaFacebook";
+import { FaInstagram, FaFacebook } from "react-icons/fa";
 import Icon50Lab from "../assets/images/50lab.jpg";
 import ZaloIcon from "../assets/images/zaloicon.png";
 
@@ -20,18 +18,36 @@ const ChatBox = () => {
       }`}
     >
       <div className="flex justify-between items-center">
-       
         <button
           onClick={toggleChatBoxSize}
-          className="text-gray-700 cursor-pointer font-bold"
+          className="text-gray-700 cursor-pointer font-bold flex flex-row "
         >
           <img
-          src={Icon50Lab}
-          alt="50LabLogo"
-          className={` rounded-full object-contain ${
-            isMinimized ? "w-16 h-16" : "w-16 h-16"
-          }`}
-        />
+            src={Icon50Lab}
+            alt="50LabLogo"
+            className={` rounded-full object-contain ${
+              isMinimized ? "w-16 h-16" : "w-16 h-16"
+            }`}
+          />
+          {/* <p className={` ${
+            isMinimized ? "hidden" : "w-96 h-48"
+          }`} >-</p> */}
+        </button>
+        <button
+          id="close-nav"
+          type="button"
+          className={`bg-white rounded-md inline-flex items-center justify-center text-primary-700 hover:text-primary 
+            hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 
+            ${isMinimized ? "hidden" : "w-16 h-16"}`}
+  
+  
+          onClick={toggleChatBoxSize}
+        >
+          <span className="sr-only">Close menu</span>
+          <img
+            src="https://sneakervitamin.net/wp-content/themes/sneaker-vitamin/images/close-menu-mobile.svg"
+            alt="Close menu"
+          />
         </button>
       </div>
 
@@ -41,7 +57,7 @@ const ChatBox = () => {
             <h3 className="text-lg font-bold text-black">
               Chat với 50-Lab ngay
             </h3>
-       
+
             <p className="text-md text-black ">
               Chất lượng đặt lên hàng đầu, khách nhận hàng không ưng không lấy
               tiền!!
