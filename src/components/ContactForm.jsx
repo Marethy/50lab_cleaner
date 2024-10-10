@@ -39,7 +39,7 @@ const ContactForm = () => {
       .then((result) => {
         // Thông báo đặt lịch thành công
         setStatusMessage(
-          "Đặt lịch thành công! Chúng tôi sẽ liên lạc với bạn sớm nhất có thể thông qua gmail và số điện thoại bạn cung cấp."
+          "Đặt lịch thành công! Chúng tôi sẽ liên lạc với bạn sớm nhất có thể thông qua email và số điện thoại bạn cung cấp."
         );
         setFormData({
           name: "",
@@ -73,7 +73,7 @@ const ContactForm = () => {
             value={formData.name}
             onChange={handleChange}
             className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Name"
+            placeholder="Tên"
             aria-label="Name"
             required
           />
@@ -167,7 +167,7 @@ const ContactForm = () => {
           className="w-full bg-blue-400 text-black font-bold py-2 rounded-full hover:bg-blue-500 transition duration-300"
           disabled={loading}
         >
-          {loading ? "Sending..." : "Submit"}
+          {loading ? "Đang gửi..." : "Gửi yêu cầu"}
         </button>
         {statusMessage && (
           <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">

@@ -6,7 +6,6 @@ const ServiceDetail = ({ id, name, serviceInfo, time, procedure }) => {
       <h2 className="text-lg font-bold">{name}</h2>
       <p>{serviceInfo}</p>
       <p><strong>Thời gian: </strong>{time}</p>
-      <p><strong>Quy trình: </strong>{procedure}</p>
     </div>
   );
 };

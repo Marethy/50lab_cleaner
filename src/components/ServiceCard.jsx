@@ -17,6 +17,7 @@ import { StarIcon } from "@heroicons/react/16/solid";
 import services from "./services"; // Import your services
 import { useNavigate } from "react-router-dom";
 
+
 const Service = ({
   service,
   beforeImage,
@@ -42,10 +43,10 @@ const Service = ({
           />
         </div>
         <div
-          className="text-lg md:text-2xl bg-gray-200 rounded-lg cursor-pointer w-full  text-center hover:bg-gray-400"
+          className="text-lg md:text-2xl  font-bold rounded-lg cursor-pointer w-full  text-center hover:bg-gray-400"
           onClick={() => navigate('/services')}
         >
-          {title}
+          {title}  
         </div>
         <div
           className="text-lg md:text-2xl  cursor-pointer"
@@ -88,9 +89,9 @@ const ServiceCard = () => {
       </div>
 
       {/* Grid layout for services with 2 columns on larger screens */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-16 ">
         {/* Service 1: Shoe Cleaning */}
-        <Service
+        <Service 
           service="service1"
           beforeImage={sb2}
           afterImage={sa2}

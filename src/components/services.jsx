@@ -2,7 +2,7 @@ const services = [
   {
     id: 1,
     name: 'Vệ Sinh Giày - 50.000đ',
-    serviceInfo: 'Dịch vụ vệ sinh cơ bản cho những đôi giày có giá trị dưới 10 triệu đồng, sử dụng dung dịch vệ sinh an toàn cho các loại chất liệu như da, da lộn và vải canvas. Giúp loại bỏ vết bẩn cứng đầu, mang lại vẻ ngoài sạch sẽ và thơm tho cho đôi giày của bạn.',
+    serviceInfo: 'Dịch vụ vệ sinh cơ bản cho những đôi giày có giá trị dưới 10 triệu đồng. Sử dụng dung dịch vệ sinh an toàn cho các loại chất liệu như da, da lộn và vải canvas. Giúp loại bỏ vết bẩn cứng đầu, mang lại vẻ ngoài sạch sẽ và thơm tho cho đôi giày của bạn.',
     time: '2-5 ngày',
     procedure: [
       'Nhận giày',
@@ -14,7 +14,7 @@ const services = [
   {
     id: 2,
     name: 'Vệ Sinh Giày Cao Cấp - 120.000đ',
-    serviceInfo: 'Dịch vụ vệ sinh dành riêng cho các loại giày cao cấp có giá trị trên 10 triệu đồng, Sử dụng dung dịch vệ sinh đặc biệt để bảo vệ chất liệu cao cấp và giữ nguyên vẻ sang trọng cho giày.',
+    serviceInfo: 'Dịch vụ vệ sinh dành riêng cho các loại giày cao cấp có giá trị trên 10 triệu đồng. Sử dụng dung dịch vệ sinh đặc biệt để bảo vệ chất liệu cao cấp và giữ nguyên vẻ sang trọng cho giày.',
     time: '2-5 ngày',
     procedure: [
       'Nhận giày',
@@ -52,14 +52,14 @@ const services = [
     id: 5,
     name: 'Sản phẩm khử mùi - 49.000đ',
     serviceInfo: 'Là sản phẩm xịt khử mùi chuyên dụng, giải pháp hiệu quả để loại bỏ hoàn toàn mùi hôi mà không ảnh hưởng đến chất liệu.',
-    time: '',
+    time: '[15 phút] - Xịt đều bên trong giày và để khô tự nhiên 15 phút để đạt hiệu quả tốt nhất.',
     procedure: [],
   },
   {
     id: 6,
     name: 'Ưu Tiên 24h - 25.000đ',
     serviceInfo: 'Dịch vụ ưu tiên dành cho khách hàng cần gấp. Chúng tôi cam kết hoàn thành vệ sinh và bảo dưỡng giày, túi xách và ví trong vòng 24 giờ.',
-    time: '24 giờ',
+    time: '[24 giờ]',
     procedure: [
       'Nhận sản phẩm',
       'Đánh giá và thực hiện nhanh chóng toàn bộ quy trình vệ sinh hoặc bảo dưỡng',
