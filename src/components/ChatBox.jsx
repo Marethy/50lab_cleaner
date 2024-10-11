@@ -36,15 +36,14 @@ const ChatBox = () => {
         <button
           id="close-nav"
           type="button"
-          className={`bg-white rounded-md inline-flex items-center justify-center text-primary-700 hover:text-primary 
+          className={`bg-white  inline-flex rounded-full items-center justify-center text-primary-700 hover:text-primary 
             hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 
             ${isMinimized ? "hidden" : "w-16 h-16"}`}
-  
-  
           onClick={toggleChatBoxSize}
         >
-          <span className="sr-only">Close menu</span>
+          <span className="sr-only ">Close menu</span>
           <img
+            
             src="https://sneakervitamin.net/wp-content/themes/sneaker-vitamin/images/close-menu-mobile.svg"
             alt="Close menu"
           />

@@ -30,7 +30,8 @@ const Service = ({
   const navigate = useNavigate();
 
   return (
-    <div className="bg-white p-10 pb-6  md:p-16 md:pb-10 rounded-3xl relative hover:shadow-lg transition-all duration-300 mx-auto">
+    <div className="bg-white p-10 pb-6  md:p-16 md:pb-10 rounded-3xl relative hover:shadow-lg transition-all duration-300 mx-auto"
+    >
       <div className="flex flex-col items-center">
         <div
           className="w-full max-w-[400px] mb-4 cursor-pointer"
