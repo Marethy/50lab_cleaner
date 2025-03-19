@@ -4,11 +4,11 @@ import { FiSun, FiMoon } from 'react-icons/fi';
 import { useTheme } from './ThemeProvider';
 
 const ThemeToggle = () => {
-  const { isDarkMode, toggleTheme } = useTheme();
+  const { isDarkMode, toggleDarkMode } = useTheme();
 
   return (
     <motion.button
-      onClick={toggleTheme}
+      onClick={toggleDarkMode}
       className={`
         p-2 rounded-full
         ${isDarkMode ? 'bg-gray-800 text-yellow-400' : 'bg-blue-100 text-blue-600'}

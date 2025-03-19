@@ -1,4 +1,8 @@
 import { FiShoppingBag, FiStar, FiClock, FiPackage, FiZap } from 'react-icons/fi';
+import { serviceImages } from '../config/images';
+
+// Add type for image paths
+type ImagePath = string;
 
 export interface Service {
   id: number;
@@ -13,9 +17,14 @@ export interface Service {
     amount: string;
     description: string;
   };
-  beforeImage?: string;
-  afterImage?: string;
+  beforeImage?: ImagePath;
+  afterImage?: ImagePath;
 }
+
+// Add type guard for image paths
+const isValidImagePath = (path: unknown): path is ImagePath => {
+  return typeof path === 'string' && path.length > 0;
+};
 
 const services: Service[] = [
   {
@@ -37,8 +46,8 @@ const services: Service[] = [
       'Làm sạch đế giày và xử lý các vết ố vàng',
       'Kiểm tra chất lượng trước khi giao lại',
     ],
-    beforeImage: './src/assets/images/sb1.jpg',
-    afterImage: './src/assets/images/sa1.jpg'
+    beforeImage: serviceImages.regularShoes.before[0],
+    afterImage: serviceImages.regularShoes.after[0]
   },
 
   {
@@ -55,8 +64,8 @@ const services: Service[] = [
       'Chăm sóc, dưỡng da và phục hồi màu sắc giày',
       'Kiểm tra kỹ lưỡng trước khi giao lại',
     ],
-    beforeImage: './src/assets/images/slb1.jpg',
-    afterImage: './src/assets/images/sla1.jpg'
+    beforeImage: serviceImages.luxuryShoes.before[0],
+    afterImage: serviceImages.luxuryShoes.after[0]
   },
   {
     id: 3,
@@ -72,8 +81,8 @@ const services: Service[] = [
       'Khử mùi và bảo dưỡng da (nếu có)',
       'Kiểm tra chất lượng tổng thể trước khi giao lại',
     ],
-    beforeImage: './src/assets/images/bb1.jpg',
-    afterImage: './src/assets/images/ba1.jpg'
+    beforeImage: serviceImages.regularBag.before[0],
+    afterImage: serviceImages.regularBag.after[0]
   },
   {
     id: 4,
@@ -89,8 +98,8 @@ const services: Service[] = [
       'Bảo dưỡng, dưỡng ẩm và phục hồi màu sắc (nếu cần)',
       'Kiểm tra chi tiết để đảm bảo chất lượng trước khi hoàn thành',
     ],
-    beforeImage: './src/assets/images/blb1.jpg',
-    afterImage: './src/assets/images/bla1.jpg'
+    beforeImage: serviceImages.luxuryBag.before[0],
+    afterImage: serviceImages.luxuryBag.after[0]
   },
   {
     id: 5,
@@ -104,8 +113,8 @@ const services: Service[] = [
       'Đánh giá và thực hiện nhanh chóng toàn bộ quy trình vệ sinh',
       'Đảm bảo chất lượng và giao sản phẩm đúng hạn trong vòng 24 giờ',
     ],
-    beforeImage: './src/assets/images/ut24h1.jpg',
-    afterImage: './src/assets/images/ut24h1.jpg'
+    beforeImage: serviceImages.priority.image,
+    afterImage: serviceImages.priority.image
   },
 ];
 

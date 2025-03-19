@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiCheck, FiClock, FiDollarSign, FiInfo, FiChevronRight } from "react-icons/fi";
 import { useImageComparison } from "../utils/imageComparison";
 import { useTheme } from "./ThemeProvider";
+import { serviceImages } from "../config/images";
 
 const Service = ({
   name,
@@ -17,14 +18,32 @@ const Service = ({
   afterImage,
 }) => {
   const containerRef = useRef(null);
-  const { isDarkMode, theme } = useTheme();
+  const { isDarkMode } = useTheme();
 
   const { comparePosition, isDragging, setIsComparing } =
     useImageComparison(containerRef);
 
   const [showDetails, setShowDetails] = React.useState(false);
-
-  const defaultImage = "./src/assets/images/default-service.jpg";
+  
+  // Add image loading optimization
+  const [imagesLoaded, setImagesLoaded] = React.useState(false);
+  
+  React.useEffect(() => {
+    const loadImages = async () => {
+      const images = [beforeImage || serviceImages.default, afterImage || serviceImages.default];
+      await Promise.all(
+        images.map((src) => {
+          return new Promise((resolve) => {
+            const img = new Image();
+            img.src = src;
+            img.onload = resolve;
+          });
+        })
+      );
+      setImagesLoaded(true);
+    };
+    loadImages();
+  }, [beforeImage, afterImage]);
 
   return (
     <motion.div
@@ -44,12 +63,19 @@ const Service = ({
         onMouseEnter={() => setIsComparing(true)}
         onMouseLeave={() => !isDragging && setIsComparing(false)}
       >
+        {/* Loading Skeleton */}
+        {!imagesLoaded && (
+          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
+        )}
+        
         {/* Before Image */}
         <div className="absolute inset-0">
           <img
-            src={beforeImage || defaultImage}
+            src={beforeImage || serviceImages.default}
             alt="Before"
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imagesLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         </div>
 
@@ -61,9 +87,11 @@ const Service = ({
           }}
         >
           <img
-            src={afterImage || defaultImage}
+            src={afterImage || serviceImages.default}
             alt="After"
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover transition-opacity duration-300 ${
+              imagesLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
           />
         </div>
 

@@ -23,6 +23,9 @@ import spkm2 from "../assets/images/spkm2.jpg";
 // Priority service
 import ut24h1 from "../assets/images/ut24h1.jpg";
 
+// Default image
+import defaultService from "../assets/images/ut24h1.jpg";
+
 export const serviceImages = {
   regularShoes: {
     before: [sb1, sb2],
@@ -47,6 +50,7 @@ export const serviceImages = {
   priority: {
     image: ut24h1,
   },
+  default: defaultService,
 };
 
 export const getServiceImages = (serviceId) => {
