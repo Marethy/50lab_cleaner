@@ -1,33 +1,39 @@
 import React from 'react';
-import Navbar from './components/Navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from './components/ThemeProvider';
+import Header from './components/Header';
 import HowItWorks from './components/HowItWorks';
-import ServiceCard from './components/ServiceCard';
 import AboutUsPage from './pages/AboutUsPage';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
-import SideBar from './components/SideBar';
-import ChatBox from './components/ChatBox'; 
+import ChatBox from './components/ChatBox';
 import HomePage from './pages/HomePage';
-import PolicyPage from './pages/PolicyPage'; // Import trang PolicyPage
-import Header from './components/Header'; // Import Header
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom"; // Import Routes và Route
-import Services from './pages/ServicesPage';
+import PolicyPage from './pages/PolicyPage';
+import ServicesPage from './pages/ServicesPage';
 
 function App() {
   return (
-    <Router className='max-w-full'>
-      <Header/>
-      <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Route cho trang chính */}
-        <Route path="/policy" element={<PolicyPage />} /> {/* Route cho trang Policy */}
-        <Route path="services" element={<Services />} /> {/* Route cho trang ServiceCard */}
-        <Route path="/contact" element={<ContactForm />} /> {/* Route cho trang ContactForm */}
-        <Route path="/about-us" element={<AboutUsPage />} /> {/* Route cho trang HowItWorks */}
-      </Routes>
-      <ChatBox />
-      <Footer />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="relative min-h-screen">
+          <div className="fixed inset-0 transition-colors duration-300 dark:bg-gray-900 bg-white -z-10" />
+          <Header />
+          <main className="pt-20">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/about-us" element={<AboutUsPage />} />
+              <Route path="/services" element={<ServicesPage />} />
+              <Route path="/how-it-works" element={<HowItWorks />} />
+              <Route path="/contact" element={<ContactForm />} />
+              <Route path="/policy" element={<PolicyPage />} />
+            </Routes>
+          </main>
+          <ChatBox />
+          <Footer />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
-}   
+}
 
 export default App;

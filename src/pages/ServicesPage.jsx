@@ -1,22 +1,14 @@
 import React from 'react';
-import ServiceDetail from '../components/ServiceDetail';
+import ServiceCard from '../components/ServiceCard';
 import services from '../components/services';
+import { useTheme } from '../components/ThemeProvider';
 
 const ServicesPage = () => {
+  const { isDarkMode } = useTheme();
+
   return (
-    <div className='mx-auto px-4 md:px-24 bg-gray-200 py-20'>
-      {services.map(service => (
-        <ServiceDetail
-          key={service.id}
-          id={service.id}
-          name={service.name}
-          serviceInfo={service.serviceInfo}
-          time={service.time}
-          procedure={service.procedure}
-          rating={service.rating}
-        />
-      ))
-      }
+    <div className={`min-h-screen w-full pt-20 ${isDarkMode ? 'bg-gray-900' : 'bg-white'}`}>
+      <ServiceCard services={services} />
     </div>
   );
 };

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import emailjs from "emailjs-com";
-import { FaQuestionCircle } from "react-icons/fa";
+import { FaQuestionCircle, FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { useTheme } from "./ThemeProvider";
 
 const ContactForm = () => {
-  const phoneRegex = "^(84|0[3|5|7|8|9])+([0-9]{8})\\b"; // Using regex in pattern
+  const { isDarkMode } = useTheme();
+  const phoneRegex = "^(84|0[3|5|7|8|9])+([0-9]{8})\\b";
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,9 +15,10 @@ const ContactForm = () => {
     priority: false,
   });
 
-  const [statusMessage, setStatusMessage] = useState(""); // For displaying status messages
-  const [loading, setLoading] = useState(false); // Loading state to prevent multiple submissions
-  const [isInfoVisible, setIsInfoVisible] = useState(false); // State to control the visibility of the info section
+  const [statusMessage, setStatusMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [isInfoVisible, setIsInfoVisible] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
 
   const handleChange = (e) => {
     const { name, type, checked, value } = e.target;
@@ -27,7 +30,7 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Hiển thị trạng thái loading
+    setLoading(true);
 
     emailjs
       .send(
@@ -36,10 +39,9 @@ const ContactForm = () => {
         formData,
         "uX5HE9XX3c98LTqzw"
       )
-      .then((result) => {
-        // Thông báo đặt lịch thành công
+      .then(() => {
         setStatusMessage(
-          "Đặt lịch thành công! Chúng tôi sẽ liên lạc với bạn sớm nhất có thể thông qua email và số điện thoại bạn cung cấp."
+          "✨ Đặt lịch thành công! Chúng tôi sẽ liên lạc với bạn sớm nhất có thể."
         );
         setFormData({
           name: "",
@@ -47,134 +49,205 @@ const ContactForm = () => {
           phoneNumber: "",
           orderService: "",
           message: "",
-          priority: false, // Reset priority
+          priority: false,
         });
       })
-      .catch((error) => {
-        // Thông báo lỗi khi gửi không thành công
-        setStatusMessage("Không thể gửi tin nhắn, vui lòng thử lại sau.");
+      .catch(() => {
+        setStatusMessage("❌ Không thể gửi tin nhắn, vui lòng thử lại sau.");
       })
       .finally(() => {
-        setLoading(false); // Tắt trạng thái loading
+        setLoading(false);
       });
   };
 
+  const inputClasses = (fieldName) =>
+    `w-full p-3 border-2 rounded-lg transition-all duration-300 outline-none ${
+      isDarkMode 
+        ? `bg-slate-800/50 border-slate-700 text-white placeholder-gray-400
+           ${focusedField === fieldName ? "border-blue-500 shadow-lg shadow-blue-500/20" : "hover:border-slate-600"}` 
+        : `bg-white border-gray-200 text-gray-900 placeholder-gray-500
+           ${focusedField === fieldName ? "border-blue-400 shadow-lg shadow-blue-100" : "hover:border-gray-300"}`
+    }`;
+
   return (
-    <section id="contact" className="py-12 bg-gray-800 text-white p-6 ">
-      <div className="text-center text-2xl font-bold mb-8">ĐẶT LỊCH NGAY</div>
-      <form
-        onSubmit={handleSubmit}
-        className=" bg-white mx-auto max-w-[600px] rounded-3xl p-6 shadow-lg text-black"
-      >
-        <div className="mb-4">
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-            placeholder="Tên"
-            aria-label="Name"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-600 rounded"
-            placeholder="Email"
-            aria-label="Email"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <input
-            type="tel"
-            name="phoneNumber"
-            value={formData.phoneNumber}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-600 rounded"
-            placeholder="Số điện thoại"
-            aria-label="Số điện thoại"
-            required
-            pattern={phoneRegex}
-          />
-        </div>
-        <div className="mb-4">
-          <select
-            name="orderService"
-            value={formData.orderService}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded"
-            aria-label="Order Service"
-            required
-          >
-            <option value="" disabled>
-              Chọn dịch vụ
-            </option>
-            <option value="vệ sinh giày">Vệ sinh giày</option>
-            <option value="vệ sinh giày luxury">Vệ sinh giày cao cấp</option>
-            <option value="vệ sinh túi/ví">Vệ sinh túi/ví</option>
-            <option value="vệ sinh túi/ví luxury">
-              Vệ sinh túi/ví cao cấp
-            </option>
-          </select>
-        </div>
-        <div className="mb-4 flex items-center">
-          <input
-            type="checkbox"
-            name="priority"
-            checked={formData.priority}
-            onChange={handleChange}
-            className="mr-2"
-            aria-label="Ưu tiên 24h"
-          />
-          <label htmlFor="priority" className="text-black">
-            Ưu tiên 24h
-          </label>
-          <button
-            type="button"
-            className="ml-auto text-blue-500 underline"
-            onClick={() => setIsInfoVisible(!isInfoVisible)}
-          >
-            <FaQuestionCircle />
-          </button>
-        </div>
-        {isInfoVisible && (
-          <div className="p-2 border border-blue-300 rounded bg-blue-100 text-blue-800">
-            Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng 24
-            giờ.
-          </div>
-        )}
-        <div className="mb-4">
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            className="w-full h-1/2 p-2 border border-gray-300 rounded"
-            rows="5"
-            placeholder="Yêu cầu thêm"
-            aria-label="Message"
-            required
-          ></textarea>
+    <section className={`py-16 ${
+      isDarkMode 
+        ? "bg-gradient-to-b from-slate-900 to-slate-800" 
+        : "bg-gradient-to-b from-gray-50 to-white"
+    }`}>
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="text-center mb-12">
+          <h2 className={`text-3xl font-bold mb-4 ${
+            isDarkMode ? "text-white" : "text-gray-900"
+          }`}>
+            ĐẶT LỊCH NGAY
+          </h2>
+          <div className="w-24 h-1 bg-blue-500 mx-auto rounded-full"></div>
         </div>
 
-        <button
-          type="submit"
-          className="w-full bg-blue-400 text-black font-bold py-2 rounded-full hover:bg-blue-500 transition duration-300"
-          disabled={loading}
+        <form
+          onSubmit={handleSubmit}
+          className={`mx-auto max-w-[600px] rounded-2xl p-8 shadow-2xl transform hover:scale-[1.02] transition-all duration-300 ${
+            isDarkMode 
+              ? "bg-slate-800/50 backdrop-blur-sm border border-slate-700" 
+              : "bg-white"
+          }`}
         >
-          {loading ? "Đang gửi..." : "Gửi yêu cầu"}
-        </button>
-        {statusMessage && (
-          <div className="mt-4 p-4 bg-green-100 text-green-800 rounded">
-            <p>{statusMessage}</p>
+          <div className="space-y-6">
+            <div className="relative">
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                onFocus={() => setFocusedField("name")}
+                onBlur={() => setFocusedField(null)}
+                className={inputClasses("name")}
+                placeholder="Tên"
+                required
+              />
+            </div>
+
+            <div className="relative">
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                onFocus={() => setFocusedField("email")}
+                onBlur={() => setFocusedField(null)}
+                className={inputClasses("email")}
+                placeholder="Email"
+                required
+              />
+            </div>
+
+            <div className="relative">
+              <input
+                type="tel"
+                name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
+                onFocus={() => setFocusedField("phone")}
+                onBlur={() => setFocusedField(null)}
+                className={inputClasses("phone")}
+                placeholder="Số điện thoại"
+                pattern={phoneRegex}
+                required
+              />
+            </div>
+
+            <div className="relative">
+              <select
+                name="orderService"
+                value={formData.orderService}
+                onChange={handleChange}
+                onFocus={() => setFocusedField("service")}
+                onBlur={() => setFocusedField(null)}
+                className={inputClasses("service")}
+                required
+              >
+                <option value="" disabled>
+                  Chọn dịch vụ
+                </option>
+                <option value="vệ sinh giày">Vệ sinh giày</option>
+                <option value="vệ sinh giày luxury">Vệ sinh giày cao cấp</option>
+                <option value="vệ sinh túi/ví">Vệ sinh túi/ví</option>
+                <option value="vệ sinh túi/ví luxury">
+                  Vệ sinh túi/ví cao cấp
+                </option>
+              </select>
+            </div>
+
+            <div className={`flex items-center space-x-4 p-4 rounded-lg ${
+              isDarkMode ? "bg-slate-700/50" : "bg-gray-50"
+            }`}>
+              <input
+                type="checkbox"
+                name="priority"
+                checked={formData.priority}
+                onChange={handleChange}
+                className="w-5 h-5 text-blue-500 rounded border-gray-300 focus:ring-blue-500"
+              />
+              <label className={`${
+                isDarkMode ? "text-gray-300" : "text-gray-700"
+              } flex-1`}>
+                Ưu tiên 24h
+              </label>
+              <button
+                type="button"
+                className="text-blue-500 hover:text-blue-600 transition-colors"
+                onClick={() => setIsInfoVisible(!isInfoVisible)}
+              >
+                <FaQuestionCircle size={20} />
+              </button>
+            </div>
+
+            {isInfoVisible && (
+              <div className={`p-4 rounded-lg animate-fade-in ${
+                isDarkMode 
+                  ? "bg-blue-900/50 text-blue-200" 
+                  : "bg-blue-50 text-blue-800"
+              }`}>
+                Siêu tốc 24h là dịch vụ ưu tiên xử lý đơn hàng của bạn trong vòng
+                24 giờ.
+              </div>
+            )}
+
+            <div className="relative">
+              <textarea
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                onFocus={() => setFocusedField("message")}
+                onBlur={() => setFocusedField(null)}
+                className={inputClasses("message")}
+                rows="5"
+                placeholder="Yêu cầu thêm"
+                required
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className={`w-full font-bold py-3 px-6 rounded-full
+                flex items-center justify-center space-x-2 
+                transition-all duration-300 transform hover:scale-105
+                disabled:opacity-50 disabled:cursor-not-allowed
+                ${isDarkMode 
+                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:from-blue-700 hover:to-blue-800" 
+                  : "bg-gradient-to-r from-blue-400 to-blue-500 text-white hover:from-blue-500 hover:to-blue-600"
+                }`}
+            >
+              {loading ? (
+                <FaSpinner className="animate-spin" />
+              ) : (
+                <>
+                  <FaPaperPlane />
+                  <span>Gửi yêu cầu</span>
+                </>
+              )}
+            </button>
+
+            {statusMessage && (
+              <div
+                className={`mt-4 p-4 rounded-lg text-center font-medium animate-fade-in ${
+                  statusMessage.includes("thành công")
+                    ? isDarkMode 
+                      ? "bg-green-900/50 text-green-200" 
+                      : "bg-green-50 text-green-800"
+                    : isDarkMode
+                      ? "bg-red-900/50 text-red-200"
+                      : "bg-red-50 text-red-800"
+                }`}
+              >
+                {statusMessage}
+              </div>
+            )}
           </div>
-        )}
-      </form>
+        </form>
+      </div>
     </section>
   );
 };
