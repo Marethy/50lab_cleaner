@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <nav className={`
-      fixed top-0 left-0 right-0 z-50 
+       fixed top-0 left-0 right-0 z-50 
       ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}
       shadow-lg transition-colors duration-300
     `}>

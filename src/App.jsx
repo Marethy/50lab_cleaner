@@ -15,8 +15,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="relative min-h-screen">
-          <div className="fixed inset-0 transition-colors duration-300 dark:bg-gray-900 bg-white -z-10" />
+        <div className="min-h-screen bg-white dark:bg-slate-900 text-gray-900 dark:text-white transition-colors duration-300">
           <Header />
           <main className="pt-20">
             <Routes>

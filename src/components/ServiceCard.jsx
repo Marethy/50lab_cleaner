@@ -1,8 +1,7 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiCheck, FiClock, FiDollarSign, FiInfo, FiChevronRight } from "react-icons/fi";
-import { useImageComparison } from "../utils/imageComparison";
+import { FiCheck, FiClock, FiDollarSign, FiInfo, FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { useTheme } from "./ThemeProvider";
 import { serviceImages } from "../config/images";
 
@@ -17,33 +16,35 @@ const Service = ({
   beforeImage,
   afterImage,
 }) => {
-  const containerRef = useRef(null);
+  const [currentImage, setCurrentImage] = useState('before');
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+  const autoPlayRef = useRef(null);
   const { isDarkMode } = useTheme();
 
-  const { comparePosition, isDragging, setIsComparing } =
-    useImageComparison(containerRef);
-
-  const [showDetails, setShowDetails] = React.useState(false);
-  
-  // Add image loading optimization
-  const [imagesLoaded, setImagesLoaded] = React.useState(false);
-  
-  React.useEffect(() => {
-    const loadImages = async () => {
-      const images = [beforeImage || serviceImages.default, afterImage || serviceImages.default];
-      await Promise.all(
-        images.map((src) => {
-          return new Promise((resolve) => {
-            const img = new Image();
-            img.src = src;
-            img.onload = resolve;
-          });
-        })
-      );
-      setImagesLoaded(true);
+  // Auto play functionality
+  useEffect(() => {
+    if (isAutoPlaying) {
+      autoPlayRef.current = setInterval(() => {
+        setCurrentImage(prev => prev === 'before' ? 'after' : 'before');
+      }, 3000);
+    }
+    return () => {
+      if (autoPlayRef.current) {
+        clearInterval(autoPlayRef.current);
+      }
     };
-    loadImages();
-  }, [beforeImage, afterImage]);
+  }, [isAutoPlaying]);
+
+  const handleMouseEnter = () => {
+    if (!isAutoPlaying) {
+      setIsAutoPlaying(true);
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsAutoPlaying(false);
+  };
 
   return (
     <motion.div
@@ -56,54 +57,75 @@ const Service = ({
           : "bg-white hover:bg-gray-50"
       } shadow-lg hover:shadow-xl transition-all duration-300`}
     >
-      {/* Image Comparison Section */}
+      {/* Image Section */}
       <div
-        ref={containerRef}
         className="relative aspect-[16/9] cursor-pointer overflow-hidden rounded-t-2xl"
-        onMouseEnter={() => setIsComparing(true)}
-        onMouseLeave={() => !isDragging && setIsComparing(false)}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
-        {/* Loading Skeleton */}
-        {!imagesLoaded && (
-          <div className="absolute inset-0 bg-gray-200 animate-pulse" />
-        )}
-        
         {/* Before Image */}
-        <div className="absolute inset-0">
+        <motion.div
+          animate={{ opacity: currentImage === 'before' ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+          className="absolute inset-0"
+        >
           <img
             src={beforeImage || serviceImages.default}
             alt="Before"
-            className={`w-full h-full object-cover transition-opacity duration-300 ${
-              imagesLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
 
         {/* After Image */}
-        <div
+        <motion.div
+          animate={{ opacity: currentImage === 'after' ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
           className="absolute inset-0"
-          style={{
-            clipPath: `inset(0 0 0 ${100 - comparePosition}%)`,
-          }}
         >
           <img
             src={afterImage || serviceImages.default}
             alt="After"
-            className={`w-full h-full object-cover transition-opacity duration-300 ${
-              imagesLoaded ? 'opacity-100' : 'opacity-0'
-            }`}
+            className="w-full h-full object-cover"
           />
+        </motion.div>
+
+        {/* Navigation Buttons */}
+        <div className="absolute inset-x-0 bottom-4 flex justify-center space-x-4">
+          <button
+            onClick={() => setCurrentImage('before')}
+            className={`p-2 rounded-full ${
+              currentImage === 'before'
+                ? 'bg-white text-gray-900'
+                : 'bg-gray-900/50 text-white'
+            } transition-all duration-300`}
+          >
+            Before
+          </button>
+          <button
+            onClick={() => setCurrentImage('after')}
+            className={`p-2 rounded-full ${
+              currentImage === 'after'
+                ? 'bg-white text-gray-900'
+                : 'bg-gray-900/50 text-white'
+            } transition-all duration-300`}
+          >
+            After
+          </button>
         </div>
 
-        {/* Comparison Slider */}
-        <div
-          className="absolute inset-y-0 w-0.5 bg-white cursor-ew-resize"
-          style={{ right: `${100 - comparePosition}%` }}
+        {/* Arrow Navigation */}
+        <button
+          onClick={() => setCurrentImage('before')}
+          className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300"
         >
-          <div className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 bg-white/90 backdrop-blur rounded-full shadow-lg flex items-center justify-center">
-            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-primary-500 to-secondary-500" />
-          </div>
-        </div>
+          <FiChevronLeft className="w-6 h-6" />
+        </button>
+        <button
+          onClick={() => setCurrentImage('after')}
+          className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300"
+        >
+          <FiChevronRight className="w-6 h-6" />
+        </button>
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none" />
@@ -163,7 +185,7 @@ const Service = ({
         >
           <div className="flex items-center space-x-2">
             <FiInfo className="w-5 h-5" />
-            <span className="font-medium">{showDetails ? "Ẩn chi tiết" : "Xem chi tiết"}</span>
+            <span className="font-medium">Chi tiết dịch vụ</span>
           </div>
           <FiChevronRight className={`w-5 h-5 transition-transform duration-300 ${
             showDetails ? "rotate-90" : ""
@@ -179,34 +201,18 @@ const Service = ({
               transition={{ duration: 0.3 }}
               className="overflow-hidden"
             >
-              <div className="pt-4 space-y-4">
-                <h4 className={`text-xl font-semibold ${
-                  isDarkMode ? "text-white" : "text-gray-900"
-                }`}>
-                  Quy trình thực hiện:
-                </h4>
-                {procedure.map((step, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: index * 0.1 }}
-                    className={`flex items-start space-x-3 p-3 rounded-lg ${
-                      isDarkMode 
-                        ? "bg-slate-700/30" 
-                        : "bg-gray-50"
-                    }`}
-                  >
-                    <div className="p-1 rounded-full bg-success-light/10">
-                      <FiCheck className={`w-4 h-4 ${
-                        isDarkMode ? "text-success-light" : "text-success-dark"
-                      }`} />
-                    </div>
-                    <p className={`${
-                      isDarkMode ? "text-gray-300" : "text-gray-600"
-                    }`}>{step}</p>
-                  </motion.div>
-                ))}
+              <div className={`pt-4 space-y-4 ${
+                isDarkMode ? "text-gray-300" : "text-gray-600"
+              }`}>
+                <h4 className="font-medium text-lg">Quy trình thực hiện:</h4>
+                <ul className="space-y-2">
+                  {procedure.map((step, index) => (
+                    <li key={index} className="flex items-start space-x-2">
+                      <FiCheck className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" />
+                      <span>{step}.</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           )}

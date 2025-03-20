@@ -43,7 +43,7 @@ const HeaderMenu = () => {
       variants={headerVariants}
       initial="initial"
       animate="animate"
-      className={`fixed w-full z-50 transition-all duration-300 ${
+      className={`fixed w-full z-[1000] transition-all duration-300 ${
         isScrolled
           ? `${isDarkMode ? 'bg-gray-900/90' : 'bg-white/90'} backdrop-blur-md shadow-lg py-2`
           : 'bg-transparent py-4'
@@ -114,74 +114,86 @@ const HeaderMenu = () => {
       {/* Mobile Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div
-            initial="closed"
-            animate="open"
-            exit="closed"
-            variants={menuVariants}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className={`lg:hidden fixed inset-y-0 right-0 w-full sm:w-80 ${
-              isDarkMode ? 'bg-gray-900' : 'bg-white'
-            } shadow-2xl`}
-          >
-            <div className="flex flex-col h-full">
-              <div className={`flex items-center justify-between p-4 ${
-                isDarkMode ? 'border-gray-700' : 'border-gray-200'
-              } border-b`}>
-                <img
-                  className="h-12 w-auto"
-                  src="/50lab.jpg"
-                  alt="50 Lab Logo"
-                />
-                <motion.button
-                  whileTap={{ scale: 0.9 }}
-                  onClick={() => setIsMenuOpen(false)}
-                  className={`p-2 rounded-md ${
-                    isDarkMode 
-                      ? 'hover:bg-gray-800 text-gray-300' 
-                      : 'hover:bg-gray-100 text-gray-600'
-                  }`}
-                >
-                  <FiX className="h-6 w-6" />
-                </motion.button>
-              </div>
-              
-              <nav className="flex-1 px-4 py-6 overflow-y-auto">
-                <ul className="space-y-4">
-                  {menuItems.map((item) => (
-                    <motion.li
-                      key={item.to}
-                      whileHover={{ x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                    >
-                      <Link
-                        to={item.to}
-                        onClick={() => setIsMenuOpen(false)}
-                        className={`block py-3 px-4 text-lg rounded-lg transition-colors
-                          ${
-                            location.pathname === item.to
-                              ? isDarkMode 
-                                ? "bg-gray-800 text-blue-400 font-medium"
-                                : "bg-blue-50 text-blue-600 font-medium"
-                              : isDarkMode
-                                ? "text-gray-300 hover:bg-gray-800"
-                                : "text-gray-600 hover:bg-gray-50"
-                          }`}
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsMenuOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[99] lg:hidden"
+            />
+            
+            {/* Menu */}
+            <motion.div
+              initial="closed"
+              animate="open"
+              exit="closed"
+              variants={menuVariants}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className={`lg:hidden fixed top-0 right-0 w-full sm:w-80 h-screen overflow-y-auto z-[100] ${
+                isDarkMode ? 'bg-gray-900' : 'bg-white'
+              } shadow-2xl`}
+            >
+              <div className="flex flex-col min-h-screen">
+                <div className={`sticky top-0 flex items-center justify-between p-4 ${
+                  isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'
+                } border-b z-10`}>
+                  <img
+                    className="h-12 w-auto"
+                    src="/50lab.jpg"
+                    alt="50 Lab Logo"
+                  />
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsMenuOpen(false)}
+                    className={`p-2 rounded-md ${
+                      isDarkMode 
+                        ? 'hover:bg-gray-800 text-gray-300' 
+                        : 'hover:bg-gray-100 text-gray-600'
+                    }`}
+                  >
+                    <FiX className="h-6 w-6" />
+                  </motion.button>
+                </div>
+                
+                <nav className="flex-1 px-4 py-6">
+                  <ul className="space-y-4">
+                    {menuItems.map((item) => (
+                      <motion.li
+                        key={item.to}
+                        whileHover={{ x: 4 }}
+                        whileTap={{ scale: 0.98 }}
                       >
-                        {item.label}
-                      </Link>
-                    </motion.li>
-                  ))}
-                </ul>
-              </nav>
+                        <Link
+                          to={item.to}
+                          onClick={() => setIsMenuOpen(false)}
+                          className={`block py-3 px-4 text-lg rounded-lg transition-colors
+                            ${
+                              location.pathname === item.to
+                                ? isDarkMode 
+                                  ? "bg-gray-800 text-blue-400 font-medium"
+                                  : "bg-blue-50 text-blue-600 font-medium"
+                                : isDarkMode
+                                  ? "text-gray-300 hover:bg-gray-800"
+                                  : "text-gray-600 hover:bg-gray-50"
+                            }`}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
+                </nav>
 
-              <div className={`p-4 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} border-t`}>
-                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} text-center`}>
-                  © 2024 50Lab. All rights reserved.
-                </p>
+                <div className={`sticky bottom-0 p-4 ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'} border-t z-10`}>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} text-center`}>
+                    © 2024 50Lab. All rights reserved.
+                  </p>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </motion.header>

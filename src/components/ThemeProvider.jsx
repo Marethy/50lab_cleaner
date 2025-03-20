@@ -1,6 +1,5 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { theme } from '../styles/theme';
 
 const ThemeContext = createContext();
 
@@ -13,67 +12,43 @@ export const useTheme = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  // Initialize theme from localStorage or system preference
-  const [theme, setTheme] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        return savedTheme;
-      }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    // Check if user has a saved preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      return savedTheme === 'dark';
     }
-    return 'light'; // Default theme
+    // Check system preference
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  // Compute isDarkMode from theme
-  const isDarkMode = theme === 'dark';
-
   useEffect(() => {
-    // Update document class
-    if (theme === 'dark') {
+    // Update document class and localStorage when theme changes
+    if (isDarkMode) {
       document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
     } else {
       document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
-    
-    // Save to localStorage
-    localStorage.setItem('theme', theme);
-  }, [theme]);
-
-  // Listen for system theme changes
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e) => {
-      setTheme(e.matches ? 'dark' : 'light');
-    };
-
-    mediaQuery.addEventListener('change', handleChange);
-    return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  }, [isDarkMode]);
 
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    setIsDarkMode(prev => !prev);
   };
 
   const value = {
     isDarkMode,
     toggleTheme,
-    theme,
   };
 
   return (
     <ThemeContext.Provider value={value}>
-      <div className={`min-h-screen transition-colors duration-300 ${
-        isDarkMode ? 'bg-slate-900 text-white' : 'bg-gray-50 text-gray-900'
-      }`}>
-        {children}
-      </div>
+      {children}
     </ThemeContext.Provider>
   );
 };
 
 ThemeProvider.propTypes = {
   children: PropTypes.node.isRequired,
-};
-
-export default ThemeProvider; 
+}; 
