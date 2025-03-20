@@ -22,6 +22,7 @@ const ChatBox = () => {
       url: "https://www.facebook.com/messages/t/113966211614285",
       bgColor: "bg-blue-500",
       hoverBgColor: "hover:bg-blue-600",
+      textColor: "text-white",
     },
     {
       name: "Facebook",
@@ -29,6 +30,7 @@ const ChatBox = () => {
       url: "https://www.facebook.com/profile.php?id=100090212237009",
       bgColor: "bg-blue-600",
       hoverBgColor: "hover:bg-blue-700",
+      textColor: "text-white",
     },
     {
       name: "Instagram",
@@ -36,13 +38,16 @@ const ChatBox = () => {
       url: "https://www.instagram.com/50lab.official",
       bgColor: "bg-gradient-to-r from-purple-500 via-pink-500 to-red-500",
       hoverBgColor: "hover:from-purple-600 hover:via-pink-600 hover:to-red-600",
+      textColor: "text-white",
     },
     {
       name: "Zalo",
       icon: <img src={ZaloIcon} alt="Zalo" className="w-6 h-6" />,
       url: "https://zalo.me/0559964424",
-      bgColor: "bg-blue-400",
-      hoverBgColor: "hover:bg-blue-500",
+      bgColor: "bg-white",
+      hoverBgColor: "hover:bg-gray-50",
+      textColor: "text-[#0068FF]",
+      extraClasses: "border-2 border-[#0068FF]",
     },
   ];
 
@@ -99,15 +104,18 @@ const ChatBox = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       className={`
-                        ${link.bgColor} ${link.hoverBgColor}
-                        p-3 rounded-lg text-white
+                        ${link.bgColor} 
+                        ${link.hoverBgColor}
+                        ${link.textColor}
+                        ${link.extraClasses || ''}
+                        p-3 rounded-lg
                         flex items-center justify-center gap-2
                         transform transition-all duration-300
                         hover:scale-105 hover:shadow-lg
                       `}
                     >
                       {link.icon}
-                      <span className="text-sm font-medium">{link.name}</span>
+                      <span className="text-sm font-medium whitespace-nowrap">{link.name}</span>
                     </a>
                   ))}
                 </div>

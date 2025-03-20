@@ -126,24 +126,27 @@ const Service = ({
         >
           <FiChevronRight className="w-6 h-6" />
         </button>
-
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 pointer-events-none" />
-
-        {/* Text Overlay */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 text-white pointer-events-none">
-          <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-bold font-heading">{name}</h3>
-            <div className="flex items-center space-x-2 bg-black/30 backdrop-blur-sm px-4 py-2 rounded-full">
-              <FiDollarSign className="w-5 h-5" />
-              <span className="text-lg font-semibold">{price}</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Service Info Section */}
       <div className="p-6 space-y-6">
+        {/* Title and Price Section */}
+        <div className="flex items-center justify-between">
+          <h3 className={`text-2xl font-bold font-heading ${
+            isDarkMode ? "text-white" : "text-gray-900"
+          }`}>{name}</h3>
+          <div className={`flex items-center space-x-2 px-4 py-2 rounded-full ${
+            isDarkMode ? "bg-slate-700" : "bg-gray-100"
+          }`}>
+            <FiDollarSign className={`w-5 h-5 ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`} />
+            <span className={`text-lg font-semibold ${
+              isDarkMode ? "text-gray-300" : "text-gray-600"
+            }`}>{price}</span>
+          </div>
+        </div>
+
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             {Icon && (
