@@ -7,8 +7,8 @@ const Footer = () => (
         <h3 className="text-lg font-bold mb-4">Thông tin liên hệ</h3>
         <p>
           Địa chỉ :{" "}
-          <a href="https://www.google.com/maps?q=69+Tân+Lập,+Đông+Hòa,+Dĩ+An,+Bình+Dương" className="underline">
-            Chung cư Bcons Miền Đông
+          <a href="https://www.google.com/maps/place/Bcons+Plaza/@10.8931201,106.7870326,17z/data=!3m1!4b1!4m6!3m5!1s0x31752d81d38ed371:0x571edeedf61a2fbe!8m2!3d10.8931201!4d106.7919035!16s%2Fg%2F11k01n_5vk?entry=ttu&g_ep=EgoyMDI1MDcyMy4wIKXMDSoASAFQAw%3D%3D" className="underline">
+            Chung cư Bcons Plaza
           </a>
         </p>
         <p>

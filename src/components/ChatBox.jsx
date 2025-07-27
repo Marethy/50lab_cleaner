@@ -19,7 +19,7 @@ const ChatBox = () => {
     {
       name: "Messenger",
       icon: <FaFacebookMessenger size={24} />,
-      url: "https://www.facebook.com/messages/t/113966211614285",
+      url: "https://m.me/113966211614285",
       bgColor: "bg-blue-500",
       hoverBgColor: "hover:bg-blue-600",
       textColor: "text-white",
