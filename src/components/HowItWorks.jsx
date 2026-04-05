@@ -1,124 +1,84 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { FiCheck, FiClock, FiDroplet, FiSun, FiScissors } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+
+const shoeSteps = [
+  { n: "01", title: "Kiểm tra và phân loại", desc: "KTV kiểm tra chất liệu (da, da lộn, vải, cao su…) để chọn phương pháp phù hợp" },
+  { n: "02", title: "Loại bỏ bụi bẩn", desc: "Làm sạch sơ bộ lớp bụi và vết bẩn bên ngoài trước khi vệ sinh sâu" },
+  { n: "03", title: "Vệ sinh chi tiết", desc: "Dung dịch an toàn theo từng chất liệu, bàn chải mềm và máy chuyên nghiệp" },
+  { n: "04", title: "Làm khô và khử mùi", desc: "Sấy kiểm soát nhiệt độ, khử mùi diệt khuẩn bằng tia UV hoặc ozone" },
+  { n: "05", title: "Kiểm tra và hoàn thiện", desc: "Kiểm tra kỹ lần cuối, đảm bảo sạch sẽ, khô ráo và đạt chuẩn" },
+];
+
+const bagSteps = [
+  { n: "01", title: "Đánh giá chất liệu", desc: "KTV kiểm tra da, vải, kim loại hoặc chi tiết đặc biệt trên túi" },
+  { n: "02", title: "Vệ sinh bề mặt ngoài", desc: "Dung dịch dịu nhẹ, không làm trầy xước hoặc phai màu vật liệu" },
+  { n: "03", title: "Làm sạch sâu bên trong", desc: "Làm sạch lót trong, khóa kéo, quai đeo bằng dụng cụ chuyên dụng" },
+  { n: "04", title: "Dưỡng và phục hồi", desc: "Dưỡng ẩm da, phục hồi độ bóng hoặc làm mềm sợi vải cao cấp" },
+  { n: "05", title: "Sấy khô và đóng gói", desc: "Sấy chế độ kiểm soát nhiệt, kiểm tra tổng thể, đóng gói cẩn thận" },
+];
 
 const HowItWorks = () => {
-  const [hoveredStep, setHoveredStep] = useState(null);
-
-  const steps = [
-    {
-      icon: <FiScissors />,
-      title: "Loại bỏ bụi bẩn",
-      description: "Cẩn thận làm sạch lớp bụi bẩn bên ngoài để chuẩn bị cho quá trình vệ sinh sâu.",
-      color: "from-purple-500 to-indigo-500",
-    },
-    {
-      icon: <FiDroplet />,
-      title: "Sử dụng dung dịch chuyên dụng",
-      description: "Áp dụng dung dịch vệ sinh phù hợp với từng loại chất liệu để đảm bảo an toàn.",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: <FiCheck />,
-      title: "Làm sạch sâu",
-      description: "Tiến hành vệ sinh kỹ lưỡng bằng các công cụ và kỹ thuật chuyên nghiệp.",
-      color: "from-green-500 to-teal-500",
-    },
-    {
-      icon: <FiClock />,
-      title: "Loại bỏ cặn bẩn",
-      description: "Cẩn thận làm sạch toàn bộ dư lượng dung dịch vệ sinh để hoàn thiện quá trình.",
-      color: "from-yellow-500 to-orange-500",
-    },
-    {
-      icon: <FiSun />,
-      title: "Sấy khô chuyên nghiệp",
-      description: "Sử dụng phương pháp sấy khô kiểm soát để bảo vệ độ bền của chất liệu.",
-      color: "from-red-500 to-pink-500",
-    },
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-    },
-  };
+  const [tab, setTab] = useState("shoes");
+  const steps = tab === "shoes" ? shoeSteps : bagSteps;
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-gray-900 to-black overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent)] opacity-50" />
-      </div>
+    <section className="bg-white py-24">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Quy trình</p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-[#1D1D1F] tracking-tight mb-4">Quy trình làm sạch</h2>
+          <p className="text-[#6E6E73] text-base max-w-md mx-auto">5 bước chuẩn đảm bảo sản phẩm sạch đẹp, an toàn và bền lâu</p>
+        </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Quy trình làm sạch
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Quy trình vệ sinh chuyên nghiệp giúp đảm bảo sản phẩm của bạn luôn sạch đẹp và bền lâu.
-          </p>
-        </motion.div>
+        {/* Tab */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex bg-[#F5F5F7] border border-[#E5E5EA] p-1 rounded-full gap-1">
+            {[
+              { key: "shoes", label: "Vệ sinh giày" },
+              { key: "bags", label: "Vệ sinh túi xách" },
+            ].map((t) => (
+              <button key={t.key} onClick={() => setTab(t.key)}
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-200 ${
+                  tab === t.key
+                    ? "bg-white text-[#1D1D1F] border border-[#E5E5EA]"
+                    : "text-[#6E6E73] hover:text-[#1D1D1F]"
+                }`}
+                style={tab === t.key ? { boxShadow: "0 1px 4px rgba(0,0,0,0.08)" } : {}}>
+                {t.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8"
-        >
-          {steps.map((step, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              onHoverStart={() => setHoveredStep(index)}
-              onHoverEnd={() => setHoveredStep(null)}
-              className="relative"
-            >
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 left-full w-full h-[2px] bg-gradient-to-r from-white/20 to-transparent transform -translate-y-1/2 z-0" />
-              )}
-
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={tab}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2, ease: "easeInOut" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+          >
+            {steps.map((step, i) => (
               <motion.div
-                animate={{
-                  scale: hoveredStep === index ? 1.05 : 1,
-                  y: hoveredStep === index ? -5 : 0,
-                }}
-                className={`relative z-10 p-6 rounded-2xl bg-gradient-to-br ${step.color} 
-                  backdrop-blur-lg shadow-lg transform transition-all duration-300`}
+                key={step.n}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.06, ease: "easeInOut" }}
+                className="bg-[#F5F5F7] rounded-[18px] p-5 border border-[#E5E5EA] flex flex-col gap-3 relative overflow-hidden"
               >
-                <div className="text-white text-3xl mb-4 ml-10">{step.icon}</div>
-                <h3 className="text-xl font-semibold text-white mb-2">
-                  {step.title}
-                </h3>
-                <p className="text-white/80 text-sm">
-                  {step.description}
-                </p>
-                
-                <div className="absolute top-4 left-4 w-8 h-8 rounded-full bg-white/20 flex items-center justify-center text-white font-bold">
-                  {index + 1}
+                <span className="absolute top-3 right-4 text-4xl font-bold text-[#1D1D1F]/5 select-none leading-none">
+                  {step.n}
+                </span>
+                <div className="w-7 h-7 rounded-lg bg-[#1D1D1F] flex items-center justify-center">
+                  <span className="text-white text-[10px] font-bold">{step.n}</span>
                 </div>
+                <h3 className="font-semibold text-[#1D1D1F] text-sm leading-snug">{step.title}</h3>
+                <p className="text-[#6E6E73] text-xs leading-relaxed">{step.desc}</p>
               </motion.div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
       </div>
     </section>
   );

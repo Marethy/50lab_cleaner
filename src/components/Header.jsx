@@ -1,203 +1,236 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState, useEffect, useRef } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiMenu, FiX } from "react-icons/fi";
-import ThemeToggle from './ThemeToggle';
-import { useTheme } from './ThemeProvider';
+import { FiMenu, FiX, FiChevronDown } from "react-icons/fi";
 
-const HeaderMenu = () => {
+const serviceDropdown = [
+  { label: "Vệ sinh giày", href: "/services#shoes" },
+  { label: "Vệ sinh túi xách", href: "/services#bags" },
+  { label: "Dịch vụ cho doanh nghiệp", href: "/lien-he-hop-tac" },
+];
+
+const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const location = useLocation();
-  const { isDarkMode } = useTheme();
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+    setIsDropdownOpen(false);
+  }, [location.pathname]);
+
+  const navLinks = [
     { to: "/", label: "Trang chủ" },
-    { to: "/services", label: "Dịch vụ" },
     { to: "/policy", label: "Chính sách" },
-    { to: "/about-us", label: "Về chúng tôi" },
-    { to: "/contact", label: "Liên hệ" },
+    { to: "/meo-cham-soc-giay", label: "Mẹo chăm sóc giày" },
+    { to: "/lien-he-hop-tac", label: "Liên hệ hợp tác" },
   ];
 
-  const headerVariants = {
-    initial: { y: -100 },
-    animate: { y: 0 },
-    exit: { y: -100 }
-  };
-
-  const menuVariants = {
-    closed: { opacity: 0, x: "100%" },
-    open: { opacity: 1, x: 0 }
-  };
+  const isActive = (path) => location.pathname === path;
 
   return (
-    <motion.header
-      variants={headerVariants}
-      initial="initial"
-      animate="animate"
+    <header
       className={`fixed w-full z-[1000] transition-all duration-300 ${
         isScrolled
-          ? `${isDarkMode ? 'bg-gray-900/90' : 'bg-white/90'} backdrop-blur-md shadow-lg py-2`
-          : 'bg-transparent py-4'
+          ? "bg-white/80 backdrop-blur-[20px] shadow-sm py-2 border-b border-black/5"
+          : "bg-white/60 backdrop-blur-[20px] py-3"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0">
             <motion.img
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="h-16 w-auto"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              className="h-14 w-auto"
               src="/50lab.jpg"
-              alt="50 Lab Logo"
+              alt="50LAB Logo"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
-            {menuItems.map((item) => (
+          {/* Desktop Nav */}
+          <nav className="hidden lg:flex items-center space-x-1">
+            <Link
+              to="/"
+              className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                isActive("/")
+                  ? "text-[#0A1628] bg-black/5"
+                  : "text-[#1D1D1F] hover:text-[#0A1628] hover:bg-black/5"
+              }`}
+            >
+              Trang chủ
+            </Link>
+
+            {/* Dịch vụ dropdown */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className={`flex items-center gap-1 px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                  isActive("/services")
+                    ? "text-[#0A1628] bg-black/5"
+                    : "text-[#1D1D1F] hover:text-[#0A1628] hover:bg-black/5"
+                }`}
+              >
+                Dịch vụ
+                <motion.span
+                  animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <FiChevronDown size={14} />
+                </motion.span>
+              </button>
+
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 w-56 bg-white/90 backdrop-blur-[20px] rounded-2xl shadow-card border border-black/5 overflow-hidden"
+                  >
+                    {serviceDropdown.map((item) => (
+                      <Link
+                        key={item.href}
+                        to={item.href}
+                        className="block px-4 py-3 text-sm text-[#1D1D1F] hover:bg-black/5 hover:text-[#0A1628] transition-colors duration-150"
+                        onClick={() => setIsDropdownOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {navLinks.slice(1).map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
-                className={`relative px-3 py-2 text-lg font-medium transition-colors duration-200
-                  ${
-                    location.pathname === item.to
-                      ? isDarkMode ? "text-blue-400" : "text-blue-600"
-                      : isDarkMode ? "text-gray-300 hover:text-blue-400" : "text-gray-600 hover:text-blue-600"
-                  }`}
+                className={`px-4 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                  isActive(item.to)
+                    ? "text-[#0A1628] bg-black/5"
+                    : "text-[#1D1D1F] hover:text-[#0A1628] hover:bg-black/5"
+                }`}
               >
                 {item.label}
-                {location.pathname === item.to && (
-                  <motion.div
-                    layoutId="underline"
-                    className={`absolute bottom-0 left-0 w-full h-0.5 ${isDarkMode ? 'bg-blue-400' : 'bg-blue-600'}`}
-                    initial={false}
-                  />
-                )}
               </Link>
             ))}
-            <ThemeToggle />
+
+            <Link to="/contact">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="ml-2 px-5 py-2.5 bg-[#E63946] text-white text-sm font-semibold rounded-full transition-all duration-200 hover:bg-[#c8313d] hover:shadow-md"
+              >
+                Đặt lịch ngay
+              </motion.button>
+            </Link>
           </nav>
 
-          {/* Mobile Menu Controls */}
-          <div className="lg:hidden flex items-center space-x-2">
-            <ThemeToggle />
+          {/* Mobile controls */}
+          <div className="lg:hidden flex items-center gap-2">
+            <Link to="/contact">
+              <button className="px-4 py-2 bg-[#E63946] text-white text-sm font-semibold rounded-full">
+                Đặt lịch
+              </button>
+            </Link>
             <motion.button
               whileTap={{ scale: 0.9 }}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`p-2 rounded-md transition-colors ${
-                isDarkMode 
-                  ? 'hover:bg-gray-800 text-gray-300' 
-                  : 'hover:bg-gray-100 text-gray-600'
-              }`}
+              className="p-2 rounded-lg hover:bg-black/5 text-[#1D1D1F]"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? (
-                <FiX className="h-6 w-6" />
-              ) : (
-                <FiMenu className="h-6 w-6" />
-              )}
+              {isMenuOpen ? <FiX className="h-6 w-6" /> : <FiMenu className="h-6 w-6" />}
             </motion.button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile menu */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
-            {/* Overlay */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsMenuOpen(false)}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[99] lg:hidden"
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[99] lg:hidden"
             />
-            
-            {/* Menu */}
             <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className={`lg:hidden fixed top-0 right-0 w-full sm:w-80 h-screen overflow-y-auto z-[100] ${
-                isDarkMode ? 'bg-gray-900' : 'bg-white'
-              } shadow-2xl`}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="lg:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-[20px] border-b border-black/5 shadow-lg z-[100]"
             >
-              <div className="flex flex-col min-h-screen">
-                <div className={`sticky top-0 flex items-center justify-between p-4 ${
-                  isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'
-                } border-b z-10`}>
-                  <img
-                    className="h-12 w-auto"
-                    src="/50lab.jpg"
-                    alt="50 Lab Logo"
-                  />
-                  <motion.button
-                    whileTap={{ scale: 0.9 }}
+              <nav className="max-w-[1200px] mx-auto px-4 py-4 flex flex-col gap-1">
+                <Link
+                  to="/"
+                  className="px-4 py-3 text-base font-medium text-[#1D1D1F] hover:bg-black/5 rounded-xl transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Trang chủ
+                </Link>
+                <div className="px-4 py-3">
+                  <p className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-2">Dịch vụ</p>
+                  {serviceDropdown.map((item) => (
+                    <Link
+                      key={item.href}
+                      to={item.href}
+                      className="block pl-3 py-2 text-base text-[#1D1D1F] hover:text-[#0A1628] transition-colors"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ))}
+                </div>
+                {navLinks.slice(1).map((item) => (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className="px-4 py-3 text-base font-medium text-[#1D1D1F] hover:bg-black/5 rounded-xl transition-colors"
                     onClick={() => setIsMenuOpen(false)}
-                    className={`p-2 rounded-md ${
-                      isDarkMode 
-                        ? 'hover:bg-gray-800 text-gray-300' 
-                        : 'hover:bg-gray-100 text-gray-600'
-                    }`}
                   >
-                    <FiX className="h-6 w-6" />
-                  </motion.button>
+                    {item.label}
+                  </Link>
+                ))}
+                <div className="pt-2 pb-2">
+                  <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
+                    <button className="w-full py-3 bg-[#E63946] text-white font-semibold rounded-full">
+                      Đặt lịch ngay
+                    </button>
+                  </Link>
                 </div>
-                
-                <nav className="flex-1 px-4 py-6">
-                  <ul className="space-y-4">
-                    {menuItems.map((item) => (
-                      <motion.li
-                        key={item.to}
-                        whileHover={{ x: 4 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Link
-                          to={item.to}
-                          onClick={() => setIsMenuOpen(false)}
-                          className={`block py-3 px-4 text-lg rounded-lg transition-colors
-                            ${
-                              location.pathname === item.to
-                                ? isDarkMode 
-                                  ? "bg-gray-800 text-blue-400 font-medium"
-                                  : "bg-blue-50 text-blue-600 font-medium"
-                                : isDarkMode
-                                  ? "text-gray-300 hover:bg-gray-800"
-                                  : "text-gray-600 hover:bg-gray-50"
-                            }`}
-                        >
-                          {item.label}
-                        </Link>
-                      </motion.li>
-                    ))}
-                  </ul>
-                </nav>
-
-                <div className={`sticky bottom-0 p-4 ${isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-white'} border-t z-10`}>
-                  <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} text-center`}>
-                    © 2024 50Lab. All rights reserved.
-                  </p>
-                </div>
-              </div>
+              </nav>
             </motion.div>
           </>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   );
 };
 
-export default HeaderMenu;
+export default Header;

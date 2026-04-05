@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Sensitive files & docs
+.env
+.env.*
+.claude/
+req.xlsx
+*.md
+!README.md

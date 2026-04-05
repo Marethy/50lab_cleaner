@@ -1,198 +1,66 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiCheck, FiClock, FiDollarSign, FiInfo, FiChevronRight, FiChevronLeft } from "react-icons/fi";
-import { useTheme } from "./ThemeProvider";
-import { serviceImages } from "../config/images";
+import { FiCheck, FiClock, FiChevronDown } from "react-icons/fi";
 
-const Service = ({
-  name,
-  price,
-  icon: Icon,
-  serviceInfo,
-  time,
-  procedure,
-  discount,
-  beforeImage,
-  afterImage,
-}) => {
-  const [currentImage, setCurrentImage] = useState('before');
-  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
+const Service = ({ name, price, icon: Icon, serviceInfo, time, procedure, discount, beforeImage, afterImage }) => {
   const [showDetails, setShowDetails] = useState(false);
-  const autoPlayRef = useRef(null);
-  const { isDarkMode } = useTheme();
-
-  // Auto play functionality
-  useEffect(() => {
-    if (isAutoPlaying) {
-      autoPlayRef.current = setInterval(() => {
-        setCurrentImage(prev => prev === 'before' ? 'after' : 'before');
-      }, 3000);
-    }
-    return () => {
-      if (autoPlayRef.current) {
-        clearInterval(autoPlayRef.current);
-      }
-    };
-  }, [isAutoPlaying]);
-
-  const handleMouseEnter = () => {
-    if (!isAutoPlaying) {
-      setIsAutoPlaying(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsAutoPlaying(false);
-  };
 
   return (
     <motion.div
-      initial={{ y: 20, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className={`group relative overflow-hidden rounded-2xl ${
-        isDarkMode 
-          ? "bg-slate-800/50 hover:bg-slate-800/80 backdrop-blur-sm" 
-          : "bg-white hover:bg-gray-50"
-      } shadow-lg hover:shadow-xl transition-all duration-300`}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
+      className="bg-white rounded-[18px] overflow-hidden border border-[#E5E5EA]"
+      style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.08)" }}
     >
-      {/* Image Section */}
-      <div
-        className="relative aspect-[16/9] cursor-pointer overflow-hidden rounded-t-2xl"
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {/* Before Image */}
-        <motion.div
-          animate={{ opacity: currentImage === 'before' ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="absolute inset-0"
-        >
-          <img
-            src={beforeImage || serviceImages.default}
-            alt="Before"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-
-        {/* After Image */}
-        <motion.div
-          animate={{ opacity: currentImage === 'after' ? 1 : 0 }}
-          transition={{ duration: 0.5 }}
-          className="absolute inset-0"
-        >
-          <img
-            src={afterImage || serviceImages.default}
-            alt="After"
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
-
-        {/* Navigation Buttons */}
-        <div className="absolute inset-x-0 bottom-4 flex justify-center space-x-4">
-          <button
-            onClick={() => setCurrentImage('before')}
-            className={`p-2 rounded-full ${
-              currentImage === 'before'
-                ? 'bg-white text-gray-900'
-                : 'bg-gray-900/50 text-white'
-            } transition-all duration-300`}
-          >
-            Before
-          </button>
-          <button
-            onClick={() => setCurrentImage('after')}
-            className={`p-2 rounded-full ${
-              currentImage === 'after'
-                ? 'bg-white text-gray-900'
-                : 'bg-gray-900/50 text-white'
-            } transition-all duration-300`}
-          >
-            After
-          </button>
+      {/* Before / After side-by-side */}
+      <div className="flex flex-col sm:flex-row">
+        <div className="relative flex-1 aspect-video sm:aspect-auto sm:h-44 overflow-hidden bg-[#F5F5F7]">
+          <img src={beforeImage} alt="Before" className="w-full h-full object-cover" />
+          <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#1D1D1F]/70 text-white text-[10px] font-semibold rounded-full">
+            TRƯỚC
+          </span>
         </div>
-
-        {/* Arrow Navigation */}
-        <button
-          onClick={() => setCurrentImage('before')}
-          className="absolute left-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300"
-        >
-          <FiChevronLeft className="w-6 h-6" />
-        </button>
-        <button
-          onClick={() => setCurrentImage('after')}
-          className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full bg-black/30 text-white hover:bg-black/50 transition-all duration-300"
-        >
-          <FiChevronRight className="w-6 h-6" />
-        </button>
+        <div className="w-px bg-[#E5E5EA] hidden sm:block" />
+        <div className="h-px bg-[#E5E5EA] sm:hidden" />
+        <div className="relative flex-1 aspect-video sm:aspect-auto sm:h-44 overflow-hidden bg-[#F5F5F7]">
+          <img src={afterImage} alt="After" className="w-full h-full object-cover" />
+          <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#E63946]/80 text-white text-[10px] font-semibold rounded-full">
+            SAU
+          </span>
+        </div>
       </div>
 
-      {/* Service Info Section */}
-      <div className="p-6 space-y-6">
-        {/* Title and Price Section */}
-        <div className="flex items-center justify-between">
-          <h3 className={`text-2xl font-bold font-heading ${
-            isDarkMode ? "text-white" : "text-gray-900"
-          }`}>{name}</h3>
-          <div className={`flex items-center space-x-2 px-4 py-2 rounded-full ${
-            isDarkMode ? "bg-slate-700" : "bg-gray-100"
-          }`}>
-            <FiDollarSign className={`w-5 h-5 ${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            }`} />
-            <span className={`text-lg font-semibold ${
-              isDarkMode ? "text-gray-300" : "text-gray-600"
-            }`}>{price}</span>
-          </div>
-        </div>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            {Icon && (
-              <div className={`p-3 rounded-xl ${
-                isDarkMode 
-                  ? "bg-slate-700/50" 
-                  : "bg-gray-100"
-              }`}>
-                <Icon className="w-6 h-6 text-primary-500" />
-              </div>
-            )}
-            <div className="flex items-center space-x-2">
-              <FiClock className={`w-5 h-5 ${
-                isDarkMode ? "text-gray-400" : "text-gray-500"
-              }`} />
-              <span className={`${
-                isDarkMode ? "text-gray-300" : "text-gray-600"
-              }`}>{time}</span>
-            </div>
-          </div>
+      {/* Info */}
+      <div className="p-5 space-y-4">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-base font-bold text-[#1D1D1F] leading-snug">{name}</h3>
           {discount && (
-            <div className="px-4 py-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white text-sm font-semibold rounded-full">
-              {discount.amount} {discount.type === 'student' ? 'Sinh viên' : 'OFF'}
-            </div>
+            <span className="text-xs font-semibold px-2.5 py-1 bg-rose-50 text-rose-600 border border-rose-100 rounded-full flex-shrink-0">
+              -{discount.amount}
+            </span>
           )}
         </div>
 
-        <p className={`${
-          isDarkMode ? "text-gray-300" : "text-gray-600"
-        } leading-relaxed`}>{serviceInfo}</p>
+        <div className="flex items-center justify-between">
+          <span className="font-bold text-[#1D1D1F] text-sm">{price}</span>
+          <div className="flex items-center gap-1.5 text-[#6E6E73] text-xs">
+            <FiClock className="w-3.5 h-3.5" />
+            {time}
+          </div>
+        </div>
+
+        <p className="text-[#6E6E73] text-sm leading-relaxed">{serviceInfo}</p>
 
         <button
           onClick={() => setShowDetails(!showDetails)}
-          className={`w-full flex items-center justify-between px-6 py-3 rounded-xl border ${
-            isDarkMode
-              ? "border-slate-700 hover:bg-slate-700/50 text-white"
-              : "border-gray-200 hover:bg-gray-50 text-gray-700"
-          } transition-all duration-300`}
+          className="w-full flex items-center justify-between px-4 py-2.5 rounded-xl border border-[#E5E5EA] text-[#1D1D1F] text-sm font-medium hover:bg-[#F5F5F7] transition-colors"
         >
-          <div className="flex items-center space-x-2">
-            <FiInfo className="w-5 h-5" />
-            <span className="font-medium">Chi tiết dịch vụ</span>
-          </div>
-          <FiChevronRight className={`w-5 h-5 transition-transform duration-300 ${
-            showDetails ? "rotate-90" : ""
-          }`} />
+          <span>Xem quy trình</span>
+          <motion.span animate={{ rotate: showDetails ? 180 : 0 }} transition={{ duration: 0.2 }}>
+            <FiChevronDown className="w-4 h-4" />
+          </motion.span>
         </button>
 
         <AnimatePresence>
@@ -201,22 +69,17 @@ const Service = ({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
               className="overflow-hidden"
             >
-              <div className={`pt-4 space-y-4 ${
-                isDarkMode ? "text-gray-300" : "text-gray-600"
-              }`}>
-                <h4 className="font-medium text-lg">Quy trình thực hiện:</h4>
-                <ul className="space-y-2">
-                  {procedure.map((step, index) => (
-                    <li key={index} className="flex items-start space-x-2">
-                      <FiCheck className="w-5 h-5 mt-0.5 flex-shrink-0 text-green-500" />
-                      <span>{step}.</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <ul className="pt-2 space-y-2">
+                {procedure.map((step, i) => (
+                  <li key={i} className="flex items-start gap-2 text-sm text-[#6E6E73]">
+                    <FiCheck className="w-4 h-4 mt-0.5 flex-shrink-0 text-green-500" />
+                    {step}
+                  </li>
+                ))}
+              </ul>
             </motion.div>
           )}
         </AnimatePresence>
@@ -233,61 +96,24 @@ Service.propTypes = {
   time: PropTypes.string.isRequired,
   procedure: PropTypes.arrayOf(PropTypes.string).isRequired,
   discount: PropTypes.shape({
-    type: PropTypes.string.isRequired,
-    amount: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    amount: PropTypes.string,
+    description: PropTypes.string,
   }),
   beforeImage: PropTypes.string,
   afterImage: PropTypes.string,
 };
 
-const ServiceCard = ({ services }) => {
-  const { isDarkMode } = useTheme();
-
-  return (
-    <section className={`py-20 ${isDarkMode ? "bg-slate-900" : "bg-gray-50"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-4 mb-16">
-          <h2 className={`text-4xl font-bold font-heading ${
-            isDarkMode ? "text-white" : "text-gray-900"
-          }`}>
-            Dịch Vụ Của Chúng Tôi
-          </h2>
-          <p className={`text-xl ${
-            isDarkMode ? "text-gray-400" : "text-gray-600"
-          }`}>
-            Khám phá các dịch vụ chuyên nghiệp của chúng tôi
-          </p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services?.map((service) => (
-            <Service key={service.id} {...service} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-};
+const ServiceCard = ({ services }) => (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+    {services?.filter((s) => s.id <= 4).map((service) => (
+      <Service key={service.id} {...service} />
+    ))}
+  </div>
+);
 
 ServiceCard.propTypes = {
-  services: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      icon: PropTypes.elementType,
-      serviceInfo: PropTypes.string.isRequired,
-      time: PropTypes.string.isRequired,
-      procedure: PropTypes.arrayOf(PropTypes.string).isRequired,
-      discount: PropTypes.shape({
-        type: PropTypes.string.isRequired,
-        amount: PropTypes.string.isRequired,
-        description: PropTypes.string.isRequired,
-      }),
-      beforeImage: PropTypes.string,
-      afterImage: PropTypes.string,
-    })
-  ).isRequired,
+  services: PropTypes.array.isRequired,
 };
 
 export default ServiceCard;

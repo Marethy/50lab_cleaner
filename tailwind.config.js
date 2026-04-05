@@ -8,6 +8,13 @@ export default {
   theme: {
     extend: {
       colors: {
+        brand: {
+          navy: '#0A1628',
+          dark: '#1D1D1F',
+          gray: '#6E6E73',
+          light: '#F5F5F7',
+          border: 'rgba(0,0,0,0.08)',
+        },
         primary: {
           50: '#f0f9ff',
           100: '#e0f2fe',
@@ -34,6 +41,9 @@ export default {
           900: '#4c1d95',
           950: '#2e1065',
         },
+      },
+      fontFamily: {
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'SF Pro Display', 'Segoe UI', 'system-ui', 'sans-serif'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-out',
@@ -79,8 +89,13 @@ export default {
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
       boxShadow: {
+        'card': '0 4px 24px rgba(0,0,0,0.06)',
+        'card-hover': '0 12px 40px rgba(0,0,0,0.12)',
         'glow': '0 0 15px rgba(59, 130, 246, 0.5)',
         'glow-lg': '0 0 30px rgba(59, 130, 246, 0.5)',
+      },
+      letterSpacing: {
+        'tight-heading': '-0.02em',
       },
     },
   },
