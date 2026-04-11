@@ -10,6 +10,7 @@ const shoeServices = [
     price: "100.000đ",
     tag: "Phổ biến",
     description: "Loại bỏ bụi bẩn, vết ố và mùi hôi cho mọi loại giày thông thường. An toàn với tất cả chất liệu.",
+    studentDiscount: true,
   },
   {
     id: "shoe-luxury",
@@ -94,9 +95,16 @@ const ServiceCard = ({ service }) => (
   >
     <div className="flex items-start justify-between gap-2">
       <h4 className="font-semibold text-[#1D1D1F] text-base leading-snug">{service.name}</h4>
-      <span className="text-xs font-medium px-2.5 py-1 bg-[#F5F5F7] text-[#1D1D1F] rounded-full border border-[#E5E5EA] flex-shrink-0">
-        {service.tag}
-      </span>
+      <div className="flex flex-col items-end gap-1 flex-shrink-0">
+        <span className="text-xs font-medium px-2.5 py-1 bg-[#F5F5F7] text-[#1D1D1F] rounded-full border border-[#E5E5EA]">
+          {service.tag}
+        </span>
+        {service.studentDiscount && (
+          <span className="text-xs font-semibold px-2.5 py-1 bg-[#FFF3CD] text-[#856404] rounded-full border border-[#FFECB5]">
+            🎓 Sinh viên giảm 50%
+          </span>
+        )}
+      </div>
     </div>
     <p className="text-[#6E6E73] text-sm leading-relaxed flex-1">{service.description}</p>
     <div className="flex items-center justify-between pt-3 border-t border-[#F5F5F7]">
@@ -119,7 +127,7 @@ const ServicesSection = ({ initialTab = "shoes" }) => {
         <div className="text-center mb-12">
           <p className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Dịch vụ</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1D1D1F] tracking-tight mb-4">
-            Dịch vụ tại 50LAB
+            Dịch vụ tại 50-Lab
           </h2>
           <p className="text-[#6E6E73] text-lg max-w-xl mx-auto">
             Chuyên vệ sinh và chăm sóc giày, túi xách — quy trình chuẩn, an toàn mọi chất liệu

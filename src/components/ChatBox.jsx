@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FaFacebookMessenger, FaInstagram, FaFacebook, FaTimes } from "react-icons/fa";
-import Icon50Lab from "../assets/images/50lab.jpg";
-import ZaloIcon from "../assets/images/zaloicon.png";
+import ZaloIcon from "../assets/icons/zalo.png";
 
 const ChatBox = () => {
   const [isMinimized, setIsMinimized] = useState(true);
@@ -72,8 +71,8 @@ const ChatBox = () => {
             className="w-full h-full flex items-center justify-center transition-transform duration-300 hover:scale-105"
           >
             <img
-              src={Icon50Lab}
-              alt="50LabLogo"
+              src="/logo.svg"
+              alt="50-Lab Logo"
               className="w-16 h-16 rounded-full object-cover shadow-md"
             />
           </button>

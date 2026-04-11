@@ -1,16 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ab1 from "../assets/images/ab1.jpg";
-import ab2 from "../assets/images/ab2.jpg";
-import ab3 from "../assets/images/ab3.jpg";
-import ab4 from "../assets/images/ab4.jpg";
-import ab5 from "../assets/images/ab5.jpg";
+import ab1 from "../assets/images/blog/post-1.jpg?format=webp";
+import ab2 from "../assets/images/blog/post-2.jpg?format=webp";
+import ab3 from "../assets/images/blog/post-3.jpg?format=webp";
+import ab4 from "../assets/images/blog/post-4.jpg?format=webp";
+import ab5 from "../assets/images/blog/post-5.jpg?format=webp";
 
 const posts = [
   {
     id: 1,
     title: "[PRE-ORDER] Gây quỹ nuôi em Mộc Châu",
-    excerpt: "50LAB tham gia chương trình Đại sứ nhân ái — Nuôi em Mộc Châu, góp phần hỗ trợ trẻ em vùng cao có điều kiện học tập tốt hơn.",
+    excerpt: "50-Lab tham gia chương trình Đại sứ nhân ái — Nuôi em Mộc Châu, góp phần hỗ trợ trẻ em vùng cao có điều kiện học tập tốt hơn.",
     image: ab1,
     fbUrl: "https://www.facebook.com/share/p/Zw8XeWHFcAZF19iB/",
     tag: "CSR",
@@ -18,15 +18,15 @@ const posts = [
   {
     id: 2,
     title: "[GÓC CHIA SẺ] Hướng dẫn vệ sinh giày tại nhà",
-    excerpt: "Bạn có thể tự vệ sinh giày tại nhà cho những vết bẩn nhỏ. Nhưng với giày cao cấp hay vết bẩn cứng đầu, hãy để 50LAB xử lý chuyên nghiệp.",
+    excerpt: "Bạn có thể tự vệ sinh giày tại nhà cho những vết bẩn nhỏ. Nhưng với giày cao cấp hay vết bẩn cứng đầu, hãy để 50-Lab xử lý chuyên nghiệp.",
     image: ab2,
     fbUrl: "https://www.facebook.com/share/p/Sa5jZvh5gRy824u1/",
     tag: "Tips",
   },
   {
     id: 3,
-    title: "[GÓC CHIA SẺ] Tại sao nên vệ sinh giày tại 50LAB?",
-    excerpt: "Quy trình 5 bước chuẩn, dung dịch chuyên dụng nhập khẩu, đội ngũ kỹ thuật viên được đào tạo bài bản — lý do khách hàng tin tưởng 50LAB.",
+    title: "[GÓC CHIA SẺ] Tại sao nên vệ sinh giày tại 50-Lab?",
+    excerpt: "Quy trình 5 bước chuẩn, dung dịch chuyên dụng nhập khẩu, đội ngũ kỹ thuật viên được đào tạo bài bản — lý do khách hàng tin tưởng 50-Lab.",
     image: ab3,
     fbUrl: "https://www.facebook.com/share/p/PenzwQLA1YrGeDyT/",
     tag: "Before/After",
@@ -34,7 +34,7 @@ const posts = [
   {
     id: 4,
     title: "[GÓC CHIA SẺ] Giày được làm từ vật liệu gì?",
-    excerpt: "Da thật, da tổng hợp, vải canvas, lưới mesh — mỗi chất liệu cần phương pháp vệ sinh khác nhau. 50LAB luôn kiểm tra trước khi xử lý.",
+    excerpt: "Da thật, da tổng hợp, vải canvas, lưới mesh — mỗi chất liệu cần phương pháp vệ sinh khác nhau. 50-Lab luôn kiểm tra trước khi xử lý.",
     image: ab4,
     fbUrl: "https://www.facebook.com/share/p/kqtcskwXezBhu7DE/",
     tag: "Tips",
@@ -63,7 +63,7 @@ const GocChiaSe = () => (
       <div className="text-center mb-12">
         <p className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Cộng đồng</p>
         <h2 className="text-3xl sm:text-4xl font-bold text-[#1D1D1F] tracking-tight mb-3">Góc chia sẻ</h2>
-        <p className="text-[#6E6E73] text-base">Câu chuyện từ khách hàng & cộng đồng 50LAB</p>
+        <p className="text-[#6E6E73] text-base">Câu chuyện từ khách hàng & cộng đồng 50-Lab</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -86,6 +86,7 @@ const GocChiaSe = () => (
                 src={post.image}
                 alt={post.title}
                 className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                loading="lazy"
               />
             </div>
             <div className="p-5">

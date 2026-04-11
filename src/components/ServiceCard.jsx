@@ -17,7 +17,7 @@ const Service = ({ name, price, icon: Icon, serviceInfo, time, procedure, discou
       {/* Before / After side-by-side */}
       <div className="flex flex-col sm:flex-row">
         <div className="relative flex-1 aspect-video sm:aspect-auto sm:h-44 overflow-hidden bg-[#F5F5F7]">
-          <img src={beforeImage} alt="Before" className="w-full h-full object-cover" />
+          <img src={beforeImage} alt="Before" className="w-full h-full object-cover" loading="lazy" />
           <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#1D1D1F]/70 text-white text-[10px] font-semibold rounded-full">
             TRƯỚC
           </span>
@@ -25,7 +25,7 @@ const Service = ({ name, price, icon: Icon, serviceInfo, time, procedure, discou
         <div className="w-px bg-[#E5E5EA] hidden sm:block" />
         <div className="h-px bg-[#E5E5EA] sm:hidden" />
         <div className="relative flex-1 aspect-video sm:aspect-auto sm:h-44 overflow-hidden bg-[#F5F5F7]">
-          <img src={afterImage} alt="After" className="w-full h-full object-cover" />
+          <img src={afterImage} alt="After" className="w-full h-full object-cover" loading="lazy" />
           <span className="absolute top-2 left-2 px-2 py-0.5 bg-[#E63946]/80 text-white text-[10px] font-semibold rounded-full">
             SAU
           </span>

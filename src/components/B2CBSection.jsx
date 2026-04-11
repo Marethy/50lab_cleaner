@@ -9,14 +9,14 @@ const card = {
 
 const B2CBSection = () => {
   return (
-    <section className="bg-[#F5F5F7] py-24">
+    <section id="audience" className="bg-[#F5F5F7] py-24">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Dành cho ai?</p>
           <h2 className="text-3xl sm:text-4xl font-bold text-[#1D1D1F] tracking-tight mb-3">
             Dịch vụ dành cho bạn
           </h2>
-          <p className="text-[#6E6E73] text-base">50LAB phục vụ cả khách hàng cá nhân lẫn doanh nghiệp</p>
+          <p className="text-[#6E6E73] text-base">50-Lab phục vụ cả khách hàng cá nhân lẫn doanh nghiệp</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -34,7 +34,7 @@ const B2CBSection = () => {
               <div className="w-10 h-10 bg-[#F5F5F7] border border-[#E5E5EA] rounded-2xl flex items-center justify-center text-xl mb-4">
                 👤
               </div>
-              <h3 className="text-xl font-bold text-[#1D1D1F] mb-2">Khách hàng cá nhân</h3>
+              <h3 className="text-xl font-bold text-[#1D1D1F] mb-2">Khách hàng cá nhân (B2C)</h3>
               <p className="text-[#6E6E73] text-sm leading-relaxed">Dịch vụ nhanh chóng, tiện lợi cho nhu cầu hằng ngày</p>
             </div>
             <ul className="space-y-2.5">
@@ -69,7 +69,7 @@ const B2CBSection = () => {
               <p className="text-white/50 text-sm leading-relaxed">Giải pháp cho tiệm giặt ủi, cửa hàng, khách sạn</p>
             </div>
             <ul className="space-y-2.5">
-              {["Hợp đồng dịch vụ theo tháng", "Chiết khấu theo số lượng", "Giao nhận tận nơi tại TP.HCM", "Đồng thương hiệu theo yêu cầu"].map((item) => (
+              {["Hợp đồng dịch vụ theo tháng", "Chiết khấu theo số lượng", "Giao nhận tận nơi tại TP.HCM"].map((item) => (
                 <li key={item} className="flex items-center gap-3 text-white text-sm">
                   <span className="text-white/40 font-bold text-lg leading-none">·</span>
                   {item}

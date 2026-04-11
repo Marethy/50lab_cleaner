@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './components/ThemeProvider';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -13,11 +13,22 @@ import B2BPage from './pages/B2BPage';
 import ShoeCareTipsPage from './pages/ShoeCareTipsPage';
 import NotFoundPage from './pages/NotFoundPage';
 
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (!hash) {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+  }, [pathname, hash]);
+  return null;
+};
+
 function App() {
   return (
     <ThemeProvider>
       <Router>
         <div className="min-h-screen bg-white text-[#1D1D1F] font-sans">
+          <ScrollToTop />
           <Header />
           <main>
             <Routes>

@@ -45,6 +45,12 @@ const Header = () => {
     { to: "/lien-he-hop-tac", label: "Liên hệ hợp tác" },
   ];
 
+  // Extra items shown only in mobile hamburger menu (sections hidden on mobile homepage)
+  const mobileOnlyLinks = [
+    { to: "/about-us", label: "Góc chia sẻ" },
+    { to: "/services#quy-trinh", label: "Quy trình làm sạch" },
+  ];
+
   const isActive = (path) => location.pathname === path;
 
   return (
@@ -63,8 +69,8 @@ const Header = () => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="h-14 w-auto"
-              src="/50lab.jpg"
-              alt="50LAB Logo"
+              src="/logo.svg"
+              alt="50-Lab Logo"
             />
           </Link>
 
@@ -206,6 +212,19 @@ const Header = () => {
                       {item.label}
                     </Link>
                   ))}
+                  <div className="mt-2 pt-2 border-t border-black/5">
+                    <p className="text-sm font-semibold text-[#6E6E73] uppercase tracking-wide mb-1">Khám phá</p>
+                    {mobileOnlyLinks.map((item) => (
+                      <Link
+                        key={item.to}
+                        to={item.to}
+                        className="block pl-3 py-2 text-base text-[#1D1D1F] hover:text-[#0A1628] transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
                 </div>
                 {navLinks.slice(1).map((item) => (
                   <Link

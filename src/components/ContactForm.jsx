@@ -5,8 +5,7 @@ import { motion } from "framer-motion";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
-    name: "", email: "", phoneNumber: "", orderService: "",
-    shoeType: "", address: "", preferredTime: "", message: "",
+    name: "", email: "", phoneNumber: "", orderService: "", address: "", message: "",
   });
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,7 +23,7 @@ const ContactForm = () => {
     )
       .then(() => {
         setStatus("success");
-        setFormData({ name: "", email: "", phoneNumber: "", orderService: "", shoeType: "", address: "", preferredTime: "", message: "" });
+        setFormData({ name: "", email: "", phoneNumber: "", orderService: "", address: "", message: "" });
       })
       .catch(() => setStatus("error"))
       .finally(() => setLoading(false));
@@ -42,7 +41,7 @@ const ContactForm = () => {
             Đặt lịch vệ sinh ngay hôm nay
           </h2>
           <p className="text-[#6E6E73] text-base max-w-md mx-auto">
-            Để lại thông tin để đội ngũ 50LAB liên hệ xác nhận trong thời gian sớm nhất.
+            Để lại thông tin để đội ngũ 50-Lab liên hệ xác nhận trong thời gian sớm nhất.
           </p>
         </div>
 
@@ -86,19 +85,9 @@ const ContactForm = () => {
               </div>
             </div>
             <div>
-              <label className={labelCls}>Loại giày / túi</label>
-              <input type="text" name="shoeType" value={formData.shoeType} onChange={handleChange}
-                placeholder="VD: Giày da nam, túi Chanel, sneaker Nike..." className={inputCls} />
-            </div>
-            <div>
               <label className={labelCls}>Địa chỉ nhận – giao</label>
               <input type="text" name="address" value={formData.address} onChange={handleChange}
                 placeholder="Số nhà, đường, phường, quận, TP.HCM" className={inputCls} />
-            </div>
-            <div>
-              <label className={labelCls}>Thời gian mong muốn</label>
-              <input type="text" name="preferredTime" value={formData.preferredTime} onChange={handleChange}
-                placeholder="VD: Sáng thứ 2, 8–10h..." className={inputCls} />
             </div>
             <div>
               <label className={labelCls}>Ghi chú thêm</label>

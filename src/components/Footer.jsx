@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
         {/* Brand */}
         <div>
-          <img src="/50lab.jpg" alt="50LAB" className="h-14 w-auto mb-4 rounded-xl" />
+          <img src="/logo.svg" alt="50-Lab" className="h-14 w-auto mb-4" />
           <p className="text-white/60 text-sm leading-relaxed max-w-xs">
             Dịch vụ vệ sinh và chăm sóc giày, túi xách cao cấp tại TP.HCM.
             Chuyên nghiệp · Tận tâm · Đúng hạn.
@@ -55,7 +55,7 @@ const Footer = () => (
       </div>
 
       <div className="mt-10 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
-        <p>© 2024 50LAB. All rights reserved.</p>
+        <p>© 2024 50-Lab. All rights reserved.</p>
         <Link to="/contact">
           <button className="px-5 py-2 bg-white/10 hover:bg-white/20 text-white rounded-full text-xs font-semibold transition-colors">
             Đặt lịch ngay →

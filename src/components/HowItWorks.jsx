@@ -22,7 +22,7 @@ const HowItWorks = () => {
   const steps = tab === "shoes" ? shoeSteps : bagSteps;
 
   return (
-    <section className="bg-white py-24">
+    <section id="quy-trinh" className="bg-white py-24">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <p className="text-xs font-semibold text-[#6E6E73] uppercase tracking-widest mb-3">Quy trình</p>

@@ -1,8 +1,8 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
+import BrandIntro from '../components/BrandIntro';
 import StatsSection from '../components/StatsSection';
 import B2CBSection from '../components/B2CBSection';
-import BrandIntro from '../components/BrandIntro';
 import ServicesSection from '../components/ServicesSection';
 import HowItWorks from '../components/HowItWorks';
 import B2BSection from '../components/B2BSection';
@@ -12,13 +12,18 @@ import ContactForm from '../components/ContactForm';
 const HomePage = () => (
   <div>
     <HeroSection />
-    <StatsSection />
-    <B2CBSection />
     <BrandIntro />
+    <StatsSection />
     <ServicesSection />
-    <HowItWorks />
+    {/* Sections below are desktop-only; on mobile use the menu */}
+    <div className="hidden md:block">
+      <B2CBSection />
+    </div>
     <B2BSection />
-    <GocChiaSe />
+    <div className="hidden md:block">
+      <HowItWorks />
+      <GocChiaSe />
+    </div>
     <ContactForm />
   </div>
 );
