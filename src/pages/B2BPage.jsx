@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import { FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { EMAILJS } from "../config/emailjs";
 
 const benefits = [
   { icon: "🔄", title: "Quy trình chuẩn chuyên nghiệp", description: "5 bước vệ sinh & đóng gói đồng nhất" },
@@ -27,17 +28,20 @@ const B2BPage = () => {
     e.preventDefault();
     setLoading(true);
     emailjs
-      .send("service_xzvm2db", "template_i25gn75", {
+      .send(EMAILJS.serviceId, EMAILJS.templateId, {
         name: form.businessName,
         phoneNumber: form.phoneNumber,
         orderService: `B2B - ${form.businessType}`,
         message: form.message || "Yêu cầu hợp tác doanh nghiệp",
-      }, "uX5HE9XX3c98LTqzw")
+      }, EMAILJS.publicKey)
       .then(() => {
         setStatus("success");
         setForm({ businessName: "", phoneNumber: "", businessType: "", message: "" });
       })
-      .catch(() => setStatus("error"))
+      .catch((err) => {
+        console.error("[B2BPage] EmailJS error:", err);
+        setStatus("error");
+      })
       .finally(() => setLoading(false));
   };
 
@@ -58,10 +62,10 @@ const B2BPage = () => {
               Dành cho doanh nghiệp
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-[-0.02em] leading-tight mb-6 max-w-3xl mx-auto">
-              Giải pháp hợp tác cùng 50LAB dành cho doanh nghiệp
+              Giải pháp hợp tác cùng 50-Lab dành cho doanh nghiệp
             </h1>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              50LAB cung cấp dịch vụ vệ sinh giày và túi chuyên nghiệp cho đối tác tại TP.HCM –
+              50-Lab cung cấp dịch vụ vệ sinh giày và túi chuyên nghiệp cho đối tác tại TP.HCM –
               giúp tối ưu quy trình, tiết kiệm chi phí và nâng cao chất lượng dịch vụ.
             </p>
           </motion.div>
@@ -116,7 +120,7 @@ const B2BPage = () => {
               Liên hệ hợp tác
             </h2>
             <p className="text-[#6E6E73] text-base">
-              Điền thông tin để đội ngũ B2B 50LAB liên hệ tư vấn cho bạn
+              Điền thông tin để đội ngũ B2B 50-Lab liên hệ tư vấn cho bạn
             </p>
           </motion.div>
 

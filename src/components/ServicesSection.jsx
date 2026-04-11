@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import emailjs from "emailjs-com";
+import { EMAILJS } from "../config/emailjs";
 
 const shoeServices = [
   {
@@ -47,14 +48,17 @@ const ConsultForm = ({ category }) => {
     e.preventDefault();
     setLoading(true);
     emailjs
-      .send("service_xzvm2db", "template_i25gn75", {
+      .send(EMAILJS.serviceId, EMAILJS.templateId, {
         name: form.name,
         phoneNumber: form.phone,
         orderService: form.service,
         message: `Yêu cầu tư vấn – ${category === "shoes" ? "Giày" : "Túi xách"}`,
-      }, "uX5HE9XX3c98LTqzw")
+      }, EMAILJS.publicKey)
       .then(() => { setStatus("success"); setForm({ name: "", phone: "", service: "" }); })
-      .catch(() => setStatus("error"))
+      .catch((err) => {
+        console.error("[ConsultForm] EmailJS error:", err);
+        setStatus("error");
+      })
       .finally(() => setLoading(false));
   };
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import emailjs from "emailjs-com";
 import { FaPaperPlane, FaSpinner } from "react-icons/fa";
 import { motion } from "framer-motion";
+import { EMAILJS } from "../config/emailjs";
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -15,17 +16,15 @@ const ContactForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    emailjs.send(
-      import.meta.env.VITE_EMAILJS_SERVICE_ID,
-      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      formData,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-    )
+    emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, formData, EMAILJS.publicKey)
       .then(() => {
         setStatus("success");
         setFormData({ name: "", email: "", phoneNumber: "", orderService: "", address: "", message: "" });
       })
-      .catch(() => setStatus("error"))
+      .catch((err) => {
+        console.error("[ContactForm] EmailJS error:", err);
+        setStatus("error");
+      })
       .finally(() => setLoading(false));
   };
 
