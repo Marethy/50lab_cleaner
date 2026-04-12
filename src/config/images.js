@@ -1,25 +1,25 @@
 // --- Shoe cleaning: basic ---
-import shoeBasicBefore1 from "../assets/images/services/shoe-basic-before-1.jpg?format=webp";
-import shoeBasicBefore2 from "../assets/images/services/shoe-basic-before-2.jpg?format=webp";
-import shoeBasicAfter1  from "../assets/images/services/shoe-basic-after-1.jpg?format=webp";
-import shoeBasicAfter2  from "../assets/images/services/shoe-basic-after-2.jpg?format=webp";
+import shoeBasicBefore1 from "../assets/images/services/shoe-basic-before-1.jpg";
+import shoeBasicBefore2 from "../assets/images/services/shoe-basic-before-2.jpg";
+import shoeBasicAfter1  from "../assets/images/services/shoe-basic-after-1.jpg";
+import shoeBasicAfter2  from "../assets/images/services/shoe-basic-after-2.jpg";
 
 // --- Shoe cleaning: luxury ---
-import shoeLuxuryBefore1 from "../assets/images/services/shoe-luxury-before-1.jpg?format=webp";
-import shoeLuxuryBefore2 from "../assets/images/services/shoe-luxury-before-2.jpg?format=webp";
-import shoeLuxuryAfter1  from "../assets/images/services/shoe-luxury-after-1.jpg?format=webp";
-import shoeLuxuryAfter2  from "../assets/images/services/shoe-luxury-after-2.jpg?format=webp";
+import shoeLuxuryBefore1 from "../assets/images/services/shoe-luxury-before-1.jpg";
+import shoeLuxuryBefore2 from "../assets/images/services/shoe-luxury-before-2.jpg";
+import shoeLuxuryAfter1  from "../assets/images/services/shoe-luxury-after-1.jpg";
+import shoeLuxuryAfter2  from "../assets/images/services/shoe-luxury-after-2.jpg";
 
 // --- Bag cleaning: basic ---
-import bagBasicBefore from "../assets/images/services/bag-basic-before.jpg?format=webp";
-import bagBasicAfter  from "../assets/images/services/bag-basic-after.jpg?format=webp";
+import bagBasicBefore from "../assets/images/services/bag-basic-before.jpg";
+import bagBasicAfter  from "../assets/images/services/bag-basic-after.jpg";
 
 // --- Bag cleaning: luxury ---
-import bagLuxuryBefore from "../assets/images/services/bag-luxury-before.jpg?w=1200&format=webp";
-import bagLuxuryAfter  from "../assets/images/services/bag-luxury-after.jpg?w=1200&format=webp";
+import bagLuxuryBefore from "../assets/images/services/bag-luxury-before.jpg";
+import bagLuxuryAfter  from "../assets/images/services/bag-luxury-after.jpg";
 
 // --- Priority 24h ---
-import priority24h from "../assets/images/services/priority-24h.jpg?format=webp";
+import priority24h from "../assets/images/services/priority-24h.jpg";
 
 export const serviceImages = {
   regularShoes: {

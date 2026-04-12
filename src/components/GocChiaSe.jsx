@@ -1,10 +1,10 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ab1 from "../assets/images/blog/post-1.jpg?format=webp";
-import ab2 from "../assets/images/blog/post-2.jpg?format=webp";
-import ab3 from "../assets/images/blog/post-3.jpg?format=webp";
-import ab4 from "../assets/images/blog/post-4.jpg?format=webp";
-import ab5 from "../assets/images/blog/post-5.jpg?format=webp";
+import ab1 from "../assets/images/blog/post-1.jpg";
+import ab2 from "../assets/images/blog/post-2.jpg";
+import ab3 from "../assets/images/blog/post-3.jpg";
+import ab4 from "../assets/images/blog/post-4.jpg";
+import ab5 from "../assets/images/blog/post-5.jpg";
 
 const posts = [
   {
