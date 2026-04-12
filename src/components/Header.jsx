@@ -47,8 +47,10 @@ const Header = () => {
 
   // Extra items shown only in mobile hamburger menu (sections hidden on mobile homepage)
   const mobileOnlyLinks = [
-    { to: "/about-us", label: "Góc chia sẻ" },
+    { to: "/#audience", label: "Dịch vụ dành cho ai?" },
     { to: "/services#quy-trinh", label: "Quy trình làm sạch" },
+    { to: "/about-us", label: "Góc chia sẻ" },
+    { to: "/lien-he-hop-tac", label: "Đối tác doanh nghiệp" },
   ];
 
   const isActive = (path) => location.pathname === path;
