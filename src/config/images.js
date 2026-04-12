@@ -15,8 +15,8 @@ import bagBasicBefore from "../assets/images/services/bag-basic-before.jpg?forma
 import bagBasicAfter  from "../assets/images/services/bag-basic-after.jpg?format=webp";
 
 // --- Bag cleaning: luxury ---
-import bagLuxuryBefore from "../assets/images/services/bag-luxury-before.jpg?format=webp";
-import bagLuxuryAfter  from "../assets/images/services/bag-luxury-after.jpg?format=webp";
+import bagLuxuryBefore from "../assets/images/services/bag-luxury-before.jpg?w=1200&format=webp";
+import bagLuxuryAfter  from "../assets/images/services/bag-luxury-after.jpg?w=1200&format=webp";
 
 // --- Priority 24h ---
 import priority24h from "../assets/images/services/priority-24h.jpg?format=webp";
