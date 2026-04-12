@@ -2,6 +2,29 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ── Theme CSS variables ─────────────────────────────────────────────────────
+   Values are space-separated RGB channels so Tailwind opacity modifiers work:
+   bg-theme-bg/80  →  rgb(255 255 255 / 0.8)
+   ─────────────────────────────────────────────────────────────────────────── */
+:root {
+  --theme-bg:      255 255 255;   /* #ffffff  — page / section background     */
+  --theme-surface: 245 245 247;   /* #F5F5F7  — elevated surface, inputs       */
+  --theme-card:    255 255 255;   /* #ffffff  — card background                */
+  --theme-text:    29  29  31;    /* #1D1D1F  — primary text                   */
+  --theme-muted:   110 110 115;   /* #6E6E73  — secondary / placeholder text   */
+  --theme-border:  229 229 234;   /* #E5E5EA  — borders & dividers             */
+}
+
+html.dark {
+  color-scheme: dark;
+  --theme-bg:      15  23  42;    /* #0f172a  — page background                */
+  --theme-surface: 30  41  59;    /* #1e293b  — elevated surface, inputs       */
+  --theme-card:    30  41  59;    /* #1e293b  — card background                */
+  --theme-text:    241 245 249;   /* #f1f5f9  — primary text                   */
+  --theme-muted:   148 163 184;   /* #94a3b8  — secondary / placeholder text   */
+  --theme-border:  255 255 255;   /* white — use with opacity: /10, /20        */
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -11,8 +34,9 @@
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    color: #1D1D1F;
-    background: #ffffff;
+    color: rgb(var(--theme-text));
+    background: rgb(var(--theme-bg));
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 }
 

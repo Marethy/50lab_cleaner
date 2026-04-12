@@ -8,6 +8,15 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Semantic tokens backed by CSS variables — auto-switch in dark mode
+        // Usage: bg-theme-bg, text-theme-text, border-theme-border, etc.
+        // Opacity modifiers work: bg-theme-bg/80, border-theme-border/10
+        'theme-bg':      'rgb(var(--theme-bg)      / <alpha-value>)',
+        'theme-surface': 'rgb(var(--theme-surface) / <alpha-value>)',
+        'theme-card':    'rgb(var(--theme-card)    / <alpha-value>)',
+        'theme-text':    'rgb(var(--theme-text)    / <alpha-value>)',
+        'theme-muted':   'rgb(var(--theme-muted)   / <alpha-value>)',
+        'theme-border':  'rgb(var(--theme-border)  / <alpha-value>)',
         brand: {
           navy: '#0A1628',
           dark: '#1D1D1F',

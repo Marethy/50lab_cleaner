@@ -1,13 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
 
-const stats = [
-  { end: 5, suffix: "+", label: "Năm kinh nghiệm" },
-  { end: 3000, suffix: "+", label: "Đôi giày & túi được làm sạch" },
-  { end: 2, suffix: " giờ", label: "Giao nhanh nhất" },
-];
-
-const useCountUp = (end, duration, start, decimals = 0) => {
+const useCountUp = (end, duration, start) => {
   const [count, setCount] = useState(0);
   const frameRef = useRef(null);
 
@@ -18,38 +13,46 @@ const useCountUp = (end, duration, start, decimals = 0) => {
       const elapsed = now - startTime;
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      const current = (end) * eased;
-      setCount(decimals ? parseFloat(current.toFixed(decimals)) : Math.floor(current));
+      setCount(Math.floor(end * eased));
       if (progress < 1) frameRef.current = requestAnimationFrame(animate);
     };
     frameRef.current = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(frameRef.current);
-  }, [start, end, duration, decimals]);
+  }, [start, end, duration]);
 
   return count;
 };
 
-const StatItem = ({ stat, started }) => {
-  const count = useCountUp(stat.end, 1000, started, stat.decimals);
+const StatItem = ({ end, suffix, label }) => {
+  const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
+  const count = useCountUp(end, 1000, inView);
+
   return (
-    <div className="flex items-center justify-center gap-1.5 px-4">
-      <span className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tabular-nums">
-        {count}{stat.suffix}
+    <div ref={ref} className="flex items-center justify-center gap-1.5 px-4">
+      <span className="text-2xl sm:text-3xl font-bold text-theme-text tabular-nums">
+        {count}{suffix}
       </span>
-      <span className="text-[#6E6E73] text-xs sm:text-sm font-medium">{stat.label}</span>
+      <span className="text-theme-muted text-xs sm:text-sm font-medium">{label}</span>
     </div>
   );
 };
 
 const StatsSection = () => {
+  const { t } = useTranslation();
   const { ref, inView } = useInView({ threshold: 0.3, triggerOnce: true });
 
+  const stats = [
+    { end: 5,    suffix: "+",          label: t("stats.experience") },
+    { end: 3000, suffix: "+",          label: t("stats.cleaned") },
+    { end: 2,    suffix: t("stats.hour"), label: t("stats.delivery") },
+  ];
+
   return (
-    <section className="bg-[#F5F5F7] border-y border-[#E5E5EA] py-4" ref={ref}>
+    <section className="bg-theme-surface border-y border-theme-border py-4" ref={ref}>
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 divide-x divide-[#E5E5EA]">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 divide-x divide-theme-border">
           {stats.map((stat) => (
-            <StatItem key={stat.label} stat={stat} started={inView} />
+            <StatItem key={stat.label} end={stat.end} suffix={stat.suffix} label={stat.label} started={inView} />
           ))}
         </div>
       </div>

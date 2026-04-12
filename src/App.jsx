@@ -28,7 +28,7 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <div className="min-h-screen bg-white text-[#1D1D1F] font-sans">
+        <div className="min-h-screen bg-theme-bg text-theme-text font-sans">
           <ScrollToTop />
           <Header />
           <main>

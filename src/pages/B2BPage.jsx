@@ -2,20 +2,11 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "emailjs-com";
 import { FaPaperPlane, FaSpinner } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 import { EMAILJS } from "../config/emailjs";
 
-const benefits = [
-  { icon: "🔄", title: "Quy trình chuẩn chuyên nghiệp", description: "5 bước vệ sinh & đóng gói đồng nhất" },
-  { icon: "🚚", title: "Giao – nhận tận nơi", description: "Thu nhận và trả hàng tận nơi trong TP.HCM" },
-  { icon: "💰", title: "Chiết khấu hấp dẫn", description: "Ưu đãi theo số lượng, hợp đồng dài hạn" },
-  { icon: "🏷️", title: "Đồng thương hiệu", description: "Hỗ trợ in tem, bao bì riêng cho đối tác" },
-  { icon: "📞", title: "Tư vấn & hỗ trợ riêng", description: "Đội ngũ B2B chuyên trách, phản hồi nhanh" },
-];
-
-const businessTypes = ["Giặt ủi", "Cửa hàng", "Khách sạn", "Khác"];
-
 const useB2BForm = () => {
-  const [form, setForm] = useState({ businessName: "", phoneNumber: "", businessType: "", message: "" });
+  const [form, setForm]     = useState({ businessName: "", phoneNumber: "", businessType: "", message: "" });
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -35,10 +26,7 @@ const useB2BForm = () => {
         setStatus("success");
         setForm({ businessName: "", phoneNumber: "", businessType: "", message: "" });
       })
-      .catch((err) => {
-        console.error("[B2BPage] EmailJS error:", err);
-        setStatus("error");
-      })
+      .catch((err) => { console.error("[B2BPage] EmailJS error:", err); setStatus("error"); })
       .finally(() => setLoading(false));
   };
 
@@ -47,34 +35,39 @@ const useB2BForm = () => {
 
 // ─── Mobile layout ────────────────────────────────────────────────────────────
 const MobileB2BPage = () => {
+  const { t } = useTranslation();
   const { form, handleChange, handleSubmit, status, loading } = useB2BForm();
-  const inputCls = "w-full px-4 py-4 bg-[#F5F5F7] border border-[#E5E5EA] rounded-xl text-[#1D1D1F] text-base placeholder-[#6E6E73] focus:outline-none focus:bg-white focus:border-[#1D1D1F] transition-all";
+  const inputCls = "w-full px-4 py-4 bg-theme-surface border border-theme-border rounded-xl text-theme-text text-base placeholder-theme-muted focus:outline-none focus:border-theme-text transition-all";
+
+  const benefits = [
+    { icon: t("b2b.benefit1Icon"), title: t("b2b.benefit1Title"), desc: t("b2b.benefit1Desc") },
+    { icon: t("b2b.benefit2Icon"), title: t("b2b.benefit2Title"), desc: t("b2b.benefit2Desc") },
+    { icon: t("b2b.benefit3Icon"), title: t("b2b.benefit3Title"), desc: t("b2b.benefit3Desc") },
+    { icon: t("b2b.benefit4Icon"), title: t("b2b.benefit4Title"), desc: t("b2b.benefit4Desc") },
+    { icon: t("b2b.benefit5Icon"), title: t("b2b.benefit5Title"), desc: t("b2b.benefit5Desc") },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-theme-bg">
       {/* Banner */}
       <section className="bg-[#0A1628] pt-24 pb-10 px-4">
         <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs font-medium rounded-full mb-4">
-          Dành cho doanh nghiệp
+          {t("b2b.badge")}
         </span>
-        <h1 className="text-2xl font-bold text-white leading-tight mb-3">
-          Giải pháp hợp tác cùng 50-Lab dành cho doanh nghiệp
-        </h1>
-        <p className="text-white/60 text-sm leading-relaxed">
-          Dịch vụ vệ sinh giày và túi chuyên nghiệp cho đối tác tại TP.HCM.
-        </p>
+        <h1 className="text-2xl font-bold text-white leading-tight mb-3">{t("b2b.title")}</h1>
+        <p className="text-white/60 text-sm leading-relaxed">{t("b2b.subtitleMobile")}</p>
       </section>
 
       {/* Benefits — compact list */}
-      <section className="bg-[#F5F5F7] py-8 px-4">
-        <h2 className="text-lg font-bold text-[#1D1D1F] mb-5">Lợi ích khi hợp tác</h2>
+      <section className="bg-theme-surface py-8 px-4">
+        <h2 className="text-lg font-bold text-theme-text mb-5">{t("b2b.benefitsTitle")}</h2>
         <ul className="flex flex-col gap-4">
           {benefits.map((b) => (
-            <li key={b.title} className="flex items-start gap-4 bg-white rounded-2xl p-4 border border-[#E5E5EA]">
+            <li key={b.title} className="flex items-start gap-4 bg-theme-card rounded-2xl p-4 border border-theme-border">
               <span className="text-2xl flex-shrink-0">{b.icon}</span>
               <div>
-                <p className="font-semibold text-[#1D1D1F] text-sm">{b.title}</p>
-                <p className="text-[#6E6E73] text-xs mt-0.5">{b.description}</p>
+                <p className="font-semibold text-theme-text text-sm">{b.title}</p>
+                <p className="text-theme-muted text-xs mt-0.5">{b.desc}</p>
               </div>
             </li>
           ))}
@@ -82,38 +75,30 @@ const MobileB2BPage = () => {
       </section>
 
       {/* Contact form */}
-      <section className="bg-white py-8 px-4">
-        <h2 className="text-xl font-bold text-[#1D1D1F] mb-2">Liên hệ hợp tác</h2>
-        <p className="text-[#6E6E73] text-sm mb-6">Đội ngũ B2B 50-Lab sẽ liên hệ tư vấn cho bạn</p>
+      <section className="bg-theme-bg py-8 px-4">
+        <h2 className="text-xl font-bold text-theme-text mb-2">{t("b2b.formTitle")}</h2>
+        <p className="text-theme-muted text-sm mb-6">{t("b2b.formSubtitleMobile")}</p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-          <input type="text" name="businessName" value={form.businessName} onChange={handleChange}
-            placeholder="Tên doanh nghiệp / cửa hàng" className={inputCls} required />
-          <input type="tel" name="phoneNumber" value={form.phoneNumber} onChange={handleChange}
-            placeholder="Số điện thoại" className={inputCls} required />
-          <select name="businessType" value={form.businessType} onChange={handleChange}
-            className={inputCls} required>
-            <option value="">-- Loại hình kinh doanh --</option>
-            {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+          <input type="text"  name="businessName"  value={form.businessName}  onChange={handleChange} placeholder={t("b2b.businessNamePlaceholder")} className={inputCls} required />
+          <input type="tel"   name="phoneNumber"   value={form.phoneNumber}   onChange={handleChange} placeholder={t("b2b.phone")} className={inputCls} required />
+          <select name="businessType" value={form.businessType} onChange={handleChange} className={inputCls} required>
+            <option value="">{t("b2b.businessTypeDefault")}</option>
+            <option value="Giặt ủi">{t("b2b.type1")}</option>
+            <option value="Cửa hàng">{t("b2b.type2")}</option>
+            <option value="Khách sạn">{t("b2b.type3")}</option>
+            <option value="Khác">{t("b2b.type4")}</option>
           </select>
           <textarea name="message" value={form.message} onChange={handleChange}
-            rows={3} placeholder="Thông tin thêm về nhu cầu hợp tác..."
-            className={inputCls + " resize-none"} />
+            rows={3} placeholder={t("b2b.notePlaceholder")} className={inputCls + " resize-none"} />
 
-          {status === "success" && (
-            <p className="text-center text-green-600 text-sm font-medium py-2">
-              ✓ Yêu cầu đã gửi! Đội ngũ B2B sẽ liên hệ bạn sớm.
-            </p>
-          )}
-          {status === "error" && (
-            <p className="text-center text-red-500 text-sm py-2">Không thể gửi, vui lòng thử lại.</p>
-          )}
+          {status === "success" && <p className="text-center text-green-600 text-sm font-medium py-2">{t("b2b.success")}</p>}
+          {status === "error"   && <p className="text-center text-red-500  text-sm          py-2">{t("b2b.error")}</p>}
 
-          {/* Sticky submit */}
-          <div className="sticky bottom-0 -mx-4 bg-white/95 backdrop-blur-sm border-t border-[#E5E5EA] px-4 py-3 mt-2">
+          <div className="sticky bottom-0 -mx-4 bg-theme-bg/95 backdrop-blur-sm border-t border-theme-border/30 px-4 py-3 mt-2">
             <button type="submit" disabled={loading}
               className="w-full py-4 bg-[#0A1628] text-white font-bold rounded-full text-base flex items-center justify-center gap-2 active:bg-[#1a2940] transition-colors disabled:opacity-50">
-              {loading ? <FaSpinner className="animate-spin" /> : <><FaPaperPlane /> Gửi yêu cầu hợp tác</>}
+              {loading ? <FaSpinner className="animate-spin" /> : <><FaPaperPlane /> {t("b2b.send")}</>}
             </button>
           </div>
         </form>
@@ -124,46 +109,40 @@ const MobileB2BPage = () => {
 
 // ─── Desktop layout ───────────────────────────────────────────────────────────
 const DesktopB2BPage = () => {
+  const { t } = useTranslation();
   const { form, handleChange, handleSubmit, status, loading } = useB2BForm();
-  const inputCls = "w-full px-4 py-3.5 rounded-xl border border-black/10 text-[#1D1D1F] text-sm placeholder-[#6E6E73] focus:outline-none focus:border-[#0A1628]/40 focus:ring-2 focus:ring-[#0A1628]/10 transition-all bg-white";
+  const inputCls = "w-full px-4 py-3.5 rounded-xl border border-theme-border text-theme-text text-sm placeholder-theme-muted focus:outline-none focus:border-theme-text focus:ring-2 focus:ring-theme-text/10 transition-all bg-theme-card";
+
+  const benefits = [
+    { icon: t("b2b.benefit1Icon"), title: t("b2b.benefit1Title"), desc: t("b2b.benefit1Desc") },
+    { icon: t("b2b.benefit2Icon"), title: t("b2b.benefit2Title"), desc: t("b2b.benefit2Desc") },
+    { icon: t("b2b.benefit3Icon"), title: t("b2b.benefit3Title"), desc: t("b2b.benefit3Desc") },
+    { icon: t("b2b.benefit4Icon"), title: t("b2b.benefit4Title"), desc: t("b2b.benefit4Desc") },
+    { icon: t("b2b.benefit5Icon"), title: t("b2b.benefit5Title"), desc: t("b2b.benefit5Desc") },
+  ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-theme-bg">
       {/* Banner */}
       <section className="bg-[#0A1628] pt-28 pb-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-block px-4 py-1.5 bg-white/10 text-white/80 text-sm font-medium rounded-full mb-6">
-              Dành cho doanh nghiệp
+              {t("b2b.badge")}
             </span>
             <h1 className="text-4xl sm:text-5xl font-bold text-white tracking-[-0.02em] leading-tight mb-6 max-w-3xl mx-auto">
-              Giải pháp hợp tác cùng 50-Lab dành cho doanh nghiệp
+              {t("b2b.title")}
             </h1>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              50-Lab cung cấp dịch vụ vệ sinh giày và túi chuyên nghiệp cho đối tác tại TP.HCM –
-              giúp tối ưu quy trình, tiết kiệm chi phí và nâng cao chất lượng dịch vụ.
-            </p>
+            <p className="text-white/60 text-lg max-w-2xl mx-auto">{t("b2b.subtitle")}</p>
           </motion.div>
         </div>
       </section>
 
       {/* Benefits — card grid */}
-      <section className="bg-[#F5F5F7] py-20">
+      <section className="bg-theme-surface py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1D1D1F] tracking-[-0.02em]">
-              Lợi ích khi hợp tác
-            </h2>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-theme-text tracking-[-0.02em]">{t("b2b.benefitsTitle")}</h2>
           </motion.div>
           <div className="grid grid-cols-5 gap-4">
             {benefits.map((b, i) => (
@@ -174,11 +153,11 @@ const DesktopB2BPage = () => {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
                 whileHover={{ y: -4 }}
-                className="bg-white rounded-2xl p-6 shadow-card flex flex-col gap-3 transition-all duration-200"
+                className="bg-theme-card rounded-2xl p-6 shadow-card flex flex-col gap-3 transition-all duration-200 border border-theme-border"
               >
                 <span className="text-2xl">{b.icon}</span>
-                <h4 className="font-semibold text-[#1D1D1F] text-sm leading-snug">{b.title}</h4>
-                <p className="text-[#6E6E73] text-xs leading-relaxed">{b.description}</p>
+                <h4 className="font-semibold text-theme-text text-sm leading-snug">{b.title}</h4>
+                <p className="text-theme-muted text-xs leading-relaxed">{b.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -186,21 +165,11 @@ const DesktopB2BPage = () => {
       </section>
 
       {/* Contact form */}
-      <section className="bg-white py-20">
+      <section className="bg-theme-bg py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-3xl font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
-              Liên hệ hợp tác
-            </h2>
-            <p className="text-[#6E6E73] text-base">
-              Điền thông tin để đội ngũ B2B 50-Lab liên hệ tư vấn cho bạn
-            </p>
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }} className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-theme-text tracking-[-0.02em] mb-3">{t("b2b.formTitle")}</h2>
+            <p className="text-theme-muted text-base">{t("b2b.formSubtitle")}</p>
           </motion.div>
 
           <motion.div
@@ -208,60 +177,45 @@ const DesktopB2BPage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="max-w-xl mx-auto bg-white rounded-3xl p-8 sm:p-10 shadow-card border border-black/5"
+            className="max-w-xl mx-auto bg-theme-card rounded-3xl p-8 sm:p-10 shadow-card border border-theme-border"
           >
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
-                  Tên doanh nghiệp / cửa hàng
-                </label>
+                <label className="block text-xs font-semibold text-theme-text mb-2 uppercase tracking-wide">{t("b2b.businessName")}</label>
                 <input type="text" name="businessName" value={form.businessName} onChange={handleChange}
-                  placeholder="Cửa hàng ABC..." className={inputCls} required />
+                  placeholder={t("b2b.businessNamePlaceholder")} className={inputCls} required />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
-                  Số điện thoại
-                </label>
+                <label className="block text-xs font-semibold text-theme-text mb-2 uppercase tracking-wide">{t("b2b.phone")}</label>
                 <input type="tel" name="phoneNumber" value={form.phoneNumber} onChange={handleChange}
                   placeholder="0xx xxx xxxx" className={inputCls} required />
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
-                  Loại hình kinh doanh
-                </label>
-                <select name="businessType" value={form.businessType} onChange={handleChange}
-                  className={inputCls} required>
-                  <option value="">-- Chọn loại hình --</option>
-                  {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+                <label className="block text-xs font-semibold text-theme-text mb-2 uppercase tracking-wide">{t("b2b.businessType")}</label>
+                <select name="businessType" value={form.businessType} onChange={handleChange} className={inputCls} required>
+                  <option value="">{t("b2b.businessTypeDesktop")}</option>
+                  <option value="Giặt ủi">{t("b2b.type1")}</option>
+                  <option value="Cửa hàng">{t("b2b.type2")}</option>
+                  <option value="Khách sạn">{t("b2b.type3")}</option>
+                  <option value="Khác">{t("b2b.type4")}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
-                  Ghi chú thêm
-                </label>
+                <label className="block text-xs font-semibold text-theme-text mb-2 uppercase tracking-wide">{t("b2b.note")}</label>
                 <textarea name="message" value={form.message} onChange={handleChange}
-                  rows={4} placeholder="Thông tin thêm về nhu cầu hợp tác..."
-                  className={inputCls + " resize-none"} />
+                  rows={4} placeholder={t("b2b.notePlaceholder")} className={inputCls + " resize-none"} />
               </div>
 
               <motion.button
-                type="submit"
-                disabled={loading}
-                whileHover={{ scale: 1.01 }}
-                whileTap={{ scale: 0.99 }}
+                type="submit" disabled={loading}
+                whileHover={{ scale: 1.01 }} whileTap={{ scale: 0.99 }}
                 className="w-full py-4 bg-[#0A1628] text-white font-bold rounded-full text-sm flex items-center justify-center gap-2 hover:bg-[#1a2940] transition-colors disabled:opacity-50"
               >
-                {loading ? <FaSpinner className="animate-spin" /> : <><FaPaperPlane /> Gửi yêu cầu hợp tác</>}
+                {loading ? <FaSpinner className="animate-spin" /> : <><FaPaperPlane /> {t("b2b.send")}</>}
               </motion.button>
 
-              {status === "success" && (
-                <p className="text-center text-green-600 text-sm font-medium">
-                  ✓ Yêu cầu đã gửi! Đội ngũ B2B sẽ liên hệ bạn sớm.
-                </p>
-              )}
-              {status === "error" && (
-                <p className="text-center text-red-500 text-sm">Không thể gửi, vui lòng thử lại.</p>
-              )}
+              {status === "success" && <p className="text-center text-green-600 text-sm font-medium">{t("b2b.success")}</p>}
+              {status === "error"   && <p className="text-center text-red-500  text-sm">{t("b2b.error")}</p>}
             </form>
           </motion.div>
         </div>
@@ -273,14 +227,8 @@ const DesktopB2BPage = () => {
 // ─── Exported component ───────────────────────────────────────────────────────
 const B2BPage = () => (
   <>
-    {/* Mobile UI */}
-    <div className="block md:hidden">
-      <MobileB2BPage />
-    </div>
-    {/* Desktop UI */}
-    <div className="hidden md:block">
-      <DesktopB2BPage />
-    </div>
+    <div className="block md:hidden"><MobileB2BPage /></div>
+    <div className="hidden md:block"><DesktopB2BPage /></div>
   </>
 );
 
