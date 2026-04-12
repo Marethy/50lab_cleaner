@@ -12,13 +12,10 @@ const benefits = [
   { icon: "📞", title: "Tư vấn & hỗ trợ riêng", description: "Đội ngũ B2B chuyên trách, phản hồi nhanh" },
 ];
 
-const B2BPage = () => {
-  const [form, setForm] = useState({
-    businessName: "",
-    phoneNumber: "",
-    businessType: "",
-    message: "",
-  });
+const businessTypes = ["Giặt ủi", "Cửa hàng", "Khách sạn", "Khác"];
+
+const useB2BForm = () => {
+  const [form, setForm] = useState({ businessName: "", phoneNumber: "", businessType: "", message: "" });
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -45,8 +42,90 @@ const B2BPage = () => {
       .finally(() => setLoading(false));
   };
 
-  const inputClass =
-    "w-full px-4 py-3.5 rounded-xl border border-black/10 text-[#1D1D1F] text-sm placeholder-[#6E6E73] focus:outline-none focus:border-[#0A1628]/40 focus:ring-2 focus:ring-[#0A1628]/10 transition-all bg-white";
+  return { form, handleChange, handleSubmit, status, loading };
+};
+
+// ─── Mobile layout ────────────────────────────────────────────────────────────
+const MobileB2BPage = () => {
+  const { form, handleChange, handleSubmit, status, loading } = useB2BForm();
+  const inputCls = "w-full px-4 py-4 bg-[#F5F5F7] border border-[#E5E5EA] rounded-xl text-[#1D1D1F] text-base placeholder-[#6E6E73] focus:outline-none focus:bg-white focus:border-[#1D1D1F] transition-all";
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Banner */}
+      <section className="bg-[#0A1628] pt-24 pb-10 px-4">
+        <span className="inline-block px-3 py-1 bg-white/10 text-white/80 text-xs font-medium rounded-full mb-4">
+          Dành cho doanh nghiệp
+        </span>
+        <h1 className="text-2xl font-bold text-white leading-tight mb-3">
+          Giải pháp hợp tác cùng 50-Lab dành cho doanh nghiệp
+        </h1>
+        <p className="text-white/60 text-sm leading-relaxed">
+          Dịch vụ vệ sinh giày và túi chuyên nghiệp cho đối tác tại TP.HCM.
+        </p>
+      </section>
+
+      {/* Benefits — compact list */}
+      <section className="bg-[#F5F5F7] py-8 px-4">
+        <h2 className="text-lg font-bold text-[#1D1D1F] mb-5">Lợi ích khi hợp tác</h2>
+        <ul className="flex flex-col gap-4">
+          {benefits.map((b) => (
+            <li key={b.title} className="flex items-start gap-4 bg-white rounded-2xl p-4 border border-[#E5E5EA]">
+              <span className="text-2xl flex-shrink-0">{b.icon}</span>
+              <div>
+                <p className="font-semibold text-[#1D1D1F] text-sm">{b.title}</p>
+                <p className="text-[#6E6E73] text-xs mt-0.5">{b.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Contact form */}
+      <section className="bg-white py-8 px-4">
+        <h2 className="text-xl font-bold text-[#1D1D1F] mb-2">Liên hệ hợp tác</h2>
+        <p className="text-[#6E6E73] text-sm mb-6">Đội ngũ B2B 50-Lab sẽ liên hệ tư vấn cho bạn</p>
+
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+          <input type="text" name="businessName" value={form.businessName} onChange={handleChange}
+            placeholder="Tên doanh nghiệp / cửa hàng" className={inputCls} required />
+          <input type="tel" name="phoneNumber" value={form.phoneNumber} onChange={handleChange}
+            placeholder="Số điện thoại" className={inputCls} required />
+          <select name="businessType" value={form.businessType} onChange={handleChange}
+            className={inputCls} required>
+            <option value="">-- Loại hình kinh doanh --</option>
+            {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+          </select>
+          <textarea name="message" value={form.message} onChange={handleChange}
+            rows={3} placeholder="Thông tin thêm về nhu cầu hợp tác..."
+            className={inputCls + " resize-none"} />
+
+          {status === "success" && (
+            <p className="text-center text-green-600 text-sm font-medium py-2">
+              ✓ Yêu cầu đã gửi! Đội ngũ B2B sẽ liên hệ bạn sớm.
+            </p>
+          )}
+          {status === "error" && (
+            <p className="text-center text-red-500 text-sm py-2">Không thể gửi, vui lòng thử lại.</p>
+          )}
+
+          {/* Sticky submit */}
+          <div className="sticky bottom-0 -mx-4 bg-white/95 backdrop-blur-sm border-t border-[#E5E5EA] px-4 py-3 mt-2">
+            <button type="submit" disabled={loading}
+              className="w-full py-4 bg-[#0A1628] text-white font-bold rounded-full text-base flex items-center justify-center gap-2 active:bg-[#1a2940] transition-colors disabled:opacity-50">
+              {loading ? <FaSpinner className="animate-spin" /> : <><FaPaperPlane /> Gửi yêu cầu hợp tác</>}
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+  );
+};
+
+// ─── Desktop layout ───────────────────────────────────────────────────────────
+const DesktopB2BPage = () => {
+  const { form, handleChange, handleSubmit, status, loading } = useB2BForm();
+  const inputCls = "w-full px-4 py-3.5 rounded-xl border border-black/10 text-[#1D1D1F] text-sm placeholder-[#6E6E73] focus:outline-none focus:border-[#0A1628]/40 focus:ring-2 focus:ring-[#0A1628]/10 transition-all bg-white";
 
   return (
     <div className="min-h-screen bg-white">
@@ -72,7 +151,7 @@ const B2BPage = () => {
         </div>
       </section>
 
-      {/* Benefits */}
+      {/* Benefits — card grid */}
       <section className="bg-[#F5F5F7] py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -86,7 +165,7 @@ const B2BPage = () => {
               Lợi ích khi hợp tác
             </h2>
           </motion.div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {benefits.map((b, i) => (
               <motion.div
                 key={b.title}
@@ -136,63 +215,33 @@ const B2BPage = () => {
                 <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
                   Tên doanh nghiệp / cửa hàng
                 </label>
-                <input
-                  type="text"
-                  name="businessName"
-                  value={form.businessName}
-                  onChange={handleChange}
-                  placeholder="Cửa hàng ABC..."
-                  className={inputClass}
-                  required
-                />
+                <input type="text" name="businessName" value={form.businessName} onChange={handleChange}
+                  placeholder="Cửa hàng ABC..." className={inputCls} required />
               </div>
-
               <div>
                 <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
                   Số điện thoại
                 </label>
-                <input
-                  type="tel"
-                  name="phoneNumber"
-                  value={form.phoneNumber}
-                  onChange={handleChange}
-                  placeholder="0xx xxx xxxx"
-                  className={inputClass}
-                  required
-                />
+                <input type="tel" name="phoneNumber" value={form.phoneNumber} onChange={handleChange}
+                  placeholder="0xx xxx xxxx" className={inputCls} required />
               </div>
-
               <div>
                 <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
                   Loại hình kinh doanh
                 </label>
-                <select
-                  name="businessType"
-                  value={form.businessType}
-                  onChange={handleChange}
-                  className={inputClass}
-                  required
-                >
+                <select name="businessType" value={form.businessType} onChange={handleChange}
+                  className={inputCls} required>
                   <option value="">-- Chọn loại hình --</option>
-                  <option value="Giặt ủi">Giặt ủi</option>
-                  <option value="Cửa hàng">Cửa hàng</option>
-                  <option value="Khách sạn">Khách sạn</option>
-                  <option value="Khác">Khác</option>
+                  {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
                 </select>
               </div>
-
               <div>
                 <label className="block text-xs font-semibold text-[#1D1D1F] mb-2 uppercase tracking-wide">
                   Ghi chú thêm
                 </label>
-                <textarea
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={4}
-                  placeholder="Thông tin thêm về nhu cầu hợp tác..."
-                  className={inputClass + " resize-none"}
-                />
+                <textarea name="message" value={form.message} onChange={handleChange}
+                  rows={4} placeholder="Thông tin thêm về nhu cầu hợp tác..."
+                  className={inputCls + " resize-none"} />
               </div>
 
               <motion.button
@@ -220,5 +269,19 @@ const B2BPage = () => {
     </div>
   );
 };
+
+// ─── Exported component ───────────────────────────────────────────────────────
+const B2BPage = () => (
+  <>
+    {/* Mobile UI */}
+    <div className="block md:hidden">
+      <MobileB2BPage />
+    </div>
+    {/* Desktop UI */}
+    <div className="hidden md:block">
+      <DesktopB2BPage />
+    </div>
+  </>
+);
 
 export default B2BPage;

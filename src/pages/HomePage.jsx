@@ -19,9 +19,7 @@ const HomePage = () => (
     <div className="hidden md:block">
       <B2CBSection />
     </div>
-    <div className="hidden md:block">
-      <B2BSection />
-    </div>
+    <B2BSection />
     <div className="hidden md:block">
       <HowItWorks />
       <GocChiaSe />
